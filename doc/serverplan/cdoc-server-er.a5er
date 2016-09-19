@@ -1,0 +1,462 @@
+﻿# A5:ER FORMAT:10
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=cdoc
+Author=Takuo Hada
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Meiryo UI
+FontSize=6
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=6
+RDBMSTypeName=PostgreSQL
+CommonField="timestamp","timestamp","@DATETIME","NOT NULL",,"","",$FFFFFFFF
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Entity]
+PName=NEW_ENTITY2
+LName=.NETクラス型/構造体型
+Comment=
+TableOption=
+Page=Main
+Left=500
+Top=800
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型種類","kind","varchar(16)","NOT NULL",,"","struct:構造体,union:共用体,enum:列挙体,typedef:別名",$FFFFFFFF,""
+Field="概要","summary","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="定義","definition","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text","NOT NULL",,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919230655
+Position="Main",500,800
+
+[Entity]
+PName=dnet_property
+LName=.NETプロパティ
+Comment=
+TableOption=
+Page=Main
+Left=550
+Top=1350
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型種類","kind","varchar(16)","NOT NULL",,"","struct:構造体,union:共用体,enum:列挙体,typedef:別名",$FFFFFFFF,""
+Field="概要","summary","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="定義","definition","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text","NOT NULL",,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919230752
+Position="Main",550,1350
+
+[Entity]
+PName=dnet_field
+LName=.NETフィールド
+Comment=
+TableOption=
+Page=Main
+Left=800
+Top=1250
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型種類","kind","varchar(16)","NOT NULL",,"","struct:構造体,union:共用体,enum:列挙体,typedef:別名",$FFFFFFFF,""
+Field="概要","summary","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="定義","definition","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text","NOT NULL",,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919230715
+Position="Main",800,1250
+
+[Entity]
+PName=NEW_ENTITY1
+LName=.NETメソッド
+Comment=
+TableOption=
+Page=Main
+Left=800
+Top=950
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型種類","kind","varchar(16)","NOT NULL",,"","struct:構造体,union:共用体,enum:列挙体,typedef:別名",$FFFFFFFF,""
+Field="概要","summary","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="定義","definition","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text","NOT NULL",,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919230625
+Position="Main",800,950
+
+[Entity]
+PName=dnet_enum
+LName=.NET列挙型
+Comment=
+TableOption=
+Page=Main
+Left=200
+Top=1350
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型種類","kind","varchar(16)","NOT NULL",,"","struct:構造体,union:共用体,enum:列挙体,typedef:別名",$FFFFFFFF,""
+Field="概要","summary","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="定義","definition","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text","NOT NULL",,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919230558
+Position="Main",200,1350
+
+[Entity]
+PName=dnet_class
+LName=.NETクラス型/構造体型
+Comment=
+TableOption=
+Page=Main
+Left=400
+Top=1100
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型種類","kind","varchar(16)","NOT NULL",,"","struct:構造体,union:共用体,enum:列挙体,typedef:別名",$FFFFFFFF,""
+Field="概要","summary","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="定義","definition","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text","NOT NULL",,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919230655
+Position="Main",400,1100
+
+[Entity]
+PName=dnet_library
+LName=.NETライブラリ
+Comment=
+TableOption=
+Page=Main
+Left=50
+Top=800
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ライブラリ名(DLL)","dll_name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="ライブラリ名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="概要","summary","text",,,"","",$FFFFFFFF,""
+Field="説明","description","text",,,"","",$FFFFFFFF,""
+Index==2,dll_name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919230510
+Position="Main",50,800
+
+[Relation]
+Entity1=c_header_file
+Entity2=c_function
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=c_header_file_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,8497,6373,4044,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20160919223726
+LineMode=0
+Bar1=850
+Bar2=637
+Bar3=404
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=c_header_file
+Entity2=c_const
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=header_file_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,5507,6311,4677,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20160919223706
+LineMode=0
+Bar1=551
+Bar2=631
+Bar3=468
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=c_function
+Entity2=c_function_parameter
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=c_function_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4391,4772,4435,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20160919223537
+LineMode=0
+Bar1=439
+Bar2=477
+Bar3=444
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=c_type
+Entity2=c_type_field
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=c_type_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2868,8699,3333,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20160919223447
+LineMode=0
+Bar1=287
+Bar2=870
+Bar3=333
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=c_header_file
+Entity2=c_type
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=c_header_file_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4817,8618,3064,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20160919223404
+LineMode=0
+Bar1=482
+Bar2=862
+Bar3=306
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=c_library
+Entity2=c_header_file
+RelationType1=2
+RelationType2=3
+Fields1=id
+Fields2=c_library_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,4189,8822,4189,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20160919223345
+LineMode=0
+Bar1=419
+Bar2=882
+Bar3=419
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=c_const
+LName=C定数
+Comment=
+TableOption=
+Page=Main
+Left=450
+Top=450
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="定数名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="定数型","type","varchar(256)",,,"","",$FFFFFFFF,""
+Field="概要","summary","text",,,"","",$FFFFFFFF,""
+Field="説明","description","text",,,"","",$FFFFFFFF,""
+Index==2,header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919224041
+Position="Main",450,450,199,201
+
+[Entity]
+PName=c_function_parameter
+LName=C関数パラメータ
+Comment=
+TableOption=
+Page=Main
+Left=1150
+Top=450
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="関数ID","c_function_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="順番","ordinal","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="パラメータ名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text",,,"","",$FFFFFFFF,""
+Index==2,c_function_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919224117
+Position="Main",1150,450,162,201
+
+[Entity]
+PName=c_function
+LName=C関数
+Comment=
+TableOption=
+Page=Main
+Left=800
+Top=450
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="関数名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="概要","summary","text",,,"","",$FFFFFFFF,""
+Field="定義","definition","text",,,"","",$FFFFFFFF,""
+Field="説明","description","text",,,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919224058
+Position="Main",800,450,201,203
+
+[Entity]
+PName=c_type_field
+LName=C型フィールド
+Comment=
+TableOption=
+Page=Main
+Left=1150
+Top=100
+Field="ID ","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="型ID","c_type_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="順番","ordinal","integer","NOT NULL",,"","",$FFFFFFFF,""
+Field="フィールド名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","type","varchar(256)",,,"","",$FFFFFFFF,""
+Field="説明","description","text",,,"","",$FFFFFFFF,""
+Index==2,c_type_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919224130
+Position="Main",1150,100,220,185
+
+[Entity]
+PName=c_type
+LName=C型
+Comment=
+TableOption=
+Page=Main
+Left=800
+Top=100
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ヘッダファイルID","c_header_file_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="型名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="型種類","kind","varchar(16)","NOT NULL",,"","struct:構造体,union:共用体,enum:列挙体,typedef:別名",$FFFFFFFF,""
+Field="概要","summary","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="定義","definition","text","NOT NULL",,"","",$FFFFFFFF,""
+Field="説明","description","text","NOT NULL",,"","",$FFFFFFFF,""
+Index==2,c_header_file_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919224027
+Position="Main",800,100,219,215
+
+[Entity]
+PName=c_header_file
+LName=Cヘッダファイル
+Comment=
+TableOption=
+Page=Main
+Left=450
+Top=100
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ライブラリID","c_library_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
+Field="ヘッダ名(パス)","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="概要","summary","text",,,"","",$FFFFFFFF,""
+Field="説明","description","text",,,"","",$FFFFFFFF,""
+Index==2,c_library_id,name
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919224014
+Position="Main",450,100,169,143
+
+[Entity]
+PName=c_library
+LName=Cライブラリ
+Comment=
+TableOption=
+Page=Main
+Left=100
+Top=100
+Field="ID","id","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ライブラリコード","code","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="ライブラリ名","name","varchar(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="概要","summary","text",,,"","",$FFFFFFFF,""
+Field="説明","description","text",,,"","",$FFFFFFFF,""
+Index==2,code
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20160919223957
+Position="Main",100,100,196,143
