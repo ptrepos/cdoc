@@ -79,74 +79,74 @@ namespace Magica.Pgdoc.Clang.Tests
 
             CDocument doc = CDocument.Load(new StringReader(TEST_XML));
 
-            Assert.AreEqual(doc.Headers[0].Name, "header1");
-            Assert.AreEqual(doc.Headers[0].Summary, "summary1");
-            Assert.AreEqual(doc.Headers[0].Description, "description1");
+            Assert.AreEqual(doc.HeaderFiles[0].Name, "header1");
+            Assert.AreEqual(doc.HeaderFiles[0].Summary, "summary1");
+            Assert.AreEqual(doc.HeaderFiles[0].Description, "description1");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Name, "type1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Kind, TypeKind.Struct);
-            Assert.AreEqual(doc.Headers[0].Types[0].Summary, "type-summary1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Description, "type-description1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Name, "type1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Kind, TypeKind.Struct);
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Summary, "type-summary1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Description, "type-description1");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[0].Name, "field1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[0].Type, "type1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[0].Description, "aaaaa1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[0].Name, "field1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[0].Type, "type1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[0].Description, "aaaaa1");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[1].Name, "field2");
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[1].Type, "type2");
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[1].Description, "aaaaa2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[1].Name, "field2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[1].Type, "type2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[1].Description, "aaaaa2");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[2].Name, "field3");
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[2].Type, "type3");
-            Assert.AreEqual(doc.Headers[0].Types[0].Fields[2].Description, "aaaaa3");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[2].Name, "field3");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[2].Type, "type3");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[2].Description, "aaaaa3");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[0].Name, "constants1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[0].Type, "int");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[0].Summary, "aaa1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[0].Description, "bbbbb1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[0].Name, "constants1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[0].Type, "int");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[0].Summary, "aaa1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[0].Description, "bbbbb1");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[1].Name, "constants2");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[1].Type, "long");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[1].Summary, "aaa2");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[1].Description, "bbbbb2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[1].Name, "constants2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[1].Type, "long");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[1].Summary, "aaa2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[1].Description, "bbbbb2");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[2].Name, "constants3");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[2].Type, "long long");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[2].Summary, "aaa3");
-            Assert.AreEqual(doc.Headers[0].Types[0].Constants[2].Description, "bbbbb3");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[2].Name, "constants3");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[2].Type, "long long");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[2].Summary, "aaa3");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Constants[2].Description, "bbbbb3");
 
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Name, "func1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Summary, "func-summary1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Definition, "func-definition1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Parameters[0].Name, "param1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Parameters[0].Description, "param-description1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Parameters[1].Name, "param2");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Parameters[1].Description, "param-description2");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Return, "func-return1");
-            Assert.AreEqual(doc.Headers[0].Types[0].Functions[0].Description, "func-description1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Name, "func1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Summary, "func-summary1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Definition, "func-definition1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Parameters[0].Name, "param1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Parameters[0].Description, "param-description1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Parameters[1].Name, "param2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Parameters[1].Description, "param-description2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Return, "func-return1");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[0].Functions[0].Description, "func-description1");
 
-            Assert.AreEqual(doc.Headers[0].Types[1].Name, "type2");
-            Assert.AreEqual(doc.Headers[0].Types[1].Kind, TypeKind.Union);
-            Assert.AreEqual(doc.Headers[0].Types[1].Summary, "type-summary2");
-            Assert.AreEqual(doc.Headers[0].Types[1].Description, "type-description2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[1].Name, "type2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[1].Kind, TypeKind.Union);
+            Assert.AreEqual(doc.HeaderFiles[0].Types[1].Summary, "type-summary2");
+            Assert.AreEqual(doc.HeaderFiles[0].Types[1].Description, "type-description2");
 
-            Assert.AreEqual(doc.Headers[1].Name, "header2");
-            Assert.AreEqual(doc.Headers[1].Summary, "summary2");
-            Assert.AreEqual(doc.Headers[1].Description, "description2");
+            Assert.AreEqual(doc.HeaderFiles[1].Name, "header2");
+            Assert.AreEqual(doc.HeaderFiles[1].Summary, "summary2");
+            Assert.AreEqual(doc.HeaderFiles[1].Description, "description2");
 
-            Assert.AreEqual(doc.Headers[1].Types[0].Name, "type3");
-            Assert.AreEqual(doc.Headers[1].Types[0].Kind, TypeKind.Enum);
-            Assert.AreEqual(doc.Headers[1].Types[0].Summary, "type-summary3");
-            Assert.AreEqual(doc.Headers[1].Types[0].Description, "type-description3");
+            Assert.AreEqual(doc.HeaderFiles[1].Types[0].Name, "type3");
+            Assert.AreEqual(doc.HeaderFiles[1].Types[0].Kind, TypeKind.Enum);
+            Assert.AreEqual(doc.HeaderFiles[1].Types[0].Summary, "type-summary3");
+            Assert.AreEqual(doc.HeaderFiles[1].Types[0].Description, "type-description3");
 
-            Assert.AreEqual(doc.Headers[1].Types[1].Name, "type4");
-            Assert.AreEqual(doc.Headers[1].Types[1].Kind, TypeKind.Typedef);
-            Assert.AreEqual(doc.Headers[1].Types[1].Summary, "type-summary4");
-            Assert.AreEqual(doc.Headers[1].Types[1].Description, "type-description4");
+            Assert.AreEqual(doc.HeaderFiles[1].Types[1].Name, "type4");
+            Assert.AreEqual(doc.HeaderFiles[1].Types[1].Kind, TypeKind.Typedef);
+            Assert.AreEqual(doc.HeaderFiles[1].Types[1].Summary, "type-summary4");
+            Assert.AreEqual(doc.HeaderFiles[1].Types[1].Description, "type-description4");
 
-            Assert.AreEqual(doc.Headers[2].Name, "header3");
-            Assert.AreEqual(doc.Headers[2].Summary, "summary3");
-            Assert.AreEqual(doc.Headers[2].Description, "description3");
+            Assert.AreEqual(doc.HeaderFiles[2].Name, "header3");
+            Assert.AreEqual(doc.HeaderFiles[2].Summary, "summary3");
+            Assert.AreEqual(doc.HeaderFiles[2].Description, "description3");
         }
 
         [TestMethod()]

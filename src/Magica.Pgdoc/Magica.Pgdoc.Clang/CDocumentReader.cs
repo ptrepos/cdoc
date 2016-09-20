@@ -37,10 +37,16 @@ namespace Magica.Pgdoc.Clang
 
             XmlElement cdocElem = (XmlElement)nodes[0];
 
+            cdoc.Id = cdocElem.GetAttribute("id");
+            cdoc.Name = cdocElem.GetAttribute("name");
+            cdoc.Summary = GetString(cdocElem, "summary");
+            cdoc.Description = GetString(cdocElem, "description");
+
+
             XmlNodeList headerElems = cdocElem.SelectNodes("header-file");
             foreach (XmlElement headerElem in headerElems)
             {
-                cdoc.Headers.Add(ParseHeader(headerElem));
+                cdoc.HeaderFiles.Add(ParseHeader(headerElem));
             }
 
             return cdoc;
@@ -89,17 +95,6 @@ namespace Magica.Pgdoc.Clang
                 type.Fields.Add(ParseField(fieldElem));
             }
             type.Description = GetString(headerElem, "description");
-
-            XmlNodeList constElems = headerElem.SelectNodes("const");
-            foreach (XmlElement constElem in constElems)
-            {
-                type.Constants.Add(ParseConst(constElem));
-            }
-            XmlNodeList funcElems = headerElem.SelectNodes("function");
-            foreach (XmlElement funcElem in funcElems)
-            {
-                type.Functions.Add(ParseFunction(funcElem));
-            }
 
             return type;
         }

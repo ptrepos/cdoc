@@ -22,6 +22,82 @@ namespace CDocEditor
         Function
     }
 
+    public class CDocTreeNode : TreeNode, IPgTreeNode
+    {
+        private CDocument data;
+
+        public CDocument Data
+        {
+            get { return data; }
+        }
+
+        public CDocTreeNode()
+        {
+        }
+
+        public CDocTreeNode(CDocument data)
+                : base(data.Name)
+        {
+            this.data = data;
+        }
+
+        public CDocTreeNode(CDocument data, TreeNode[] children)
+                : base(data.Name, children)
+        {
+            this.data = data;
+        }
+
+        public Control CreateEditor()
+        {
+            CDocEditor editor = new CDocEditor(this);
+
+            return editor;
+        }
+
+        public override object Clone()
+        {
+            throw new NotSupportedException();
+        }
+    }
+
+    public class CHeaderFileTreeNode : TreeNode, IPgTreeNode
+    {
+        private CHeaderFile data;
+
+        public CHeaderFile Data
+        {
+            get { return data; }
+        }
+
+        public CHeaderFileTreeNode()
+        {
+        }
+
+        public CHeaderFileTreeNode(CHeaderFile data)
+                : base(data.Name)
+        {
+            this.data = data;
+        }
+
+        public CHeaderFileTreeNode(CHeaderFile data, TreeNode[] children)
+                : base(data.Name, children)
+        {
+            this.data = data;
+        }
+
+        public Control CreateEditor()
+        {
+            Control editor = new CHeaderEditor(this);
+
+            return editor;
+        }
+
+        public override object Clone()
+        {
+            throw new NotSupportedException();
+        }
+    }
+
     public class GroupTreeNode : TreeNode
     {
         public GroupType Type { get; set; }
@@ -40,54 +116,17 @@ namespace CDocEditor
                     this.Text = MessageResource.Type;
                     break;
                 case GroupType.Constants:
-                    this.Text = MessageResource.Constants;
+                    this.Text = MessageResource.Const;
                     break;
                 case GroupType.Function:
                     this.Text = MessageResource.Function;
                     break;
             }
         }
-    }
-
-    public class CHeaderTreeNode : TreeNode, IPgTreeNode
-    {
-        private CHeaderFile data;
-
-        public CHeaderFile Data
-        {
-            get { return data; }
-        }
-
-        public CHeaderTreeNode()
-        {
-        }
-
-        public CHeaderTreeNode(CHeaderFile data)
-                : base(data.Name)
-        {
-            this.data = data;
-        }
-
-        public CHeaderTreeNode(CHeaderFile data, TreeNode[] children)
-                : base(data.Name, children)
-        {
-            this.data = data;
-        }
-
-        public Control CreateEditor()
-        {
-            Control editor = new CHeaderEditor(this);
-
-            return editor;
-        }
 
         public override object Clone()
         {
-            CHeaderTreeNode view = (CHeaderTreeNode)base.Clone();
-
-            view.data = (CHeaderFile)data.Clone();
-
-            return view;
+            throw new NotSupportedException();
         }
     }
 

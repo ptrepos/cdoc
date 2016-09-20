@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 
 namespace Magica.Pgdoc.Clang
 {
-    public class CDocument
+    public class CDocument : ICloneable
     {
         public const string FileExtension = ".pgdoc";
 
-        private List<CHeaderFile> headers = new List<CHeaderFile>();
+        private List<CHeaderFile> headerFiles = new List<CHeaderFile>();
 
-        public List<CHeaderFile> Headers
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Summary { get; set; }
+        public string Description { get; set; }
+
+        public List<CHeaderFile> HeaderFiles
         {
-            get { return headers; }
+            get { return headerFiles; }
         }
 
         public static CDocument Load(string filename)
@@ -46,6 +51,15 @@ namespace Magica.Pgdoc.Clang
         {
             CDocumentWriter docWriter = new CDocumentWriter();
             docWriter.Write(writer, this);
+        }
+
+        public object Clone()
+        {
+            CDocument def = (CDocument)MemberwiseClone();
+
+            def.headerFiles = ListUtil.Clone(def.headerFiles);
+
+            return def;
         }
     }
 }

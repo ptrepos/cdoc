@@ -18,19 +18,13 @@ namespace Magica.Pgdoc.Clang
         public List<CTypeField> Fields { get { return fields;  } }
         public string Description { get; set; }
 
-        public List<CFunction> Functions { get { return functions; } }
-        public List<CConst> Constants { get { return constants; } }
-
         private List<CTypeField> fields = new List<CTypeField>();
-        private List<CFunction> functions = new List<CFunction>();
-        private List<CConst> constants = new List<CConst>();
 
         public object Clone()
         {
             CType def = (CType)MemberwiseClone();
 
-            def.functions = ListUtil.Clone(def.functions);
-            def.constants = ListUtil.Clone(def.constants);
+            def.fields = ListUtil.Clone(def.fields);
 
             return def;
         }

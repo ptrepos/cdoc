@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 using Magica.Pgdoc.Clang;
 
 namespace CDocEditor
 {
-    public partial class CHeaderEditor : UserControl, IPgdocEditor
+    public partial class CDocEditor : UserControl, IPgdocEditor
     {
-        private CHeaderFileTreeNode node;
+        private CDocTreeNode node;
 
-        public CHeaderEditor(CHeaderFileTreeNode node)
+        public CDocEditor(CDocTreeNode node)
         {
             InitializeComponent();
 
             this.node = node;
 
+            idBox.Text = this.node.Data.Id;
             nameBox.Text = this.node.Data.Name;
             summaryBox.Text = this.node.Data.Summary;
-            remarksBox.Text = this.node.Data.Description;
+            descriptionBox.Text = this.node.Data.Description;
         }
 
         public void RefreshData()
         {
+            this.node.Data.Id = idBox.Text;
             this.node.Data.Name = nameBox.Text;
             this.node.Data.Summary = summaryBox.Text;
-            this.node.Data.Description = remarksBox.Text;
+            this.node.Data.Description = descriptionBox.Text;
 
-            this.node.Text = this.node.Data.Name;
+            this.node.Text = nameBox.Text;
         }
 
         private void nameBox_Validated(object sender, EventArgs e)

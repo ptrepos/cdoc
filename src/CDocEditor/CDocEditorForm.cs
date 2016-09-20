@@ -9,7 +9,8 @@ namespace CDocEditor
 {
     public partial class CDocEditorForm : Form
     {
-        private CDocument doc = null;
+        private CDocTreeNode cdocNode;
+
         private string filename = null;
         private Control currentEditor = null;
 
@@ -17,7 +18,9 @@ namespace CDocEditor
         {
             InitializeComponent();
 
-            doc = new CDocument();
+            CDocument doc = new CDocument();
+            doc.Id = "lib1";
+            doc.Name = "library-1";
 
             SetData(doc);
         }
@@ -43,9 +46,9 @@ namespace CDocEditor
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                GetData(this.doc);
+                CDocument doc = GetData();
 
-                this.doc.Save(dialog.FileName);
+                doc.Save(dialog.FileName);
 
                 this.filename = dialog.FileName;
 
@@ -56,7 +59,7 @@ namespace CDocEditor
 
         private void fileSaveOverrideMenuItem_Click(object sender, EventArgs e)
         {
-            GetData(this.doc);
+            CDocument doc = GetData();
 
             doc.Save(this.filename);
 
@@ -109,10 +112,6 @@ namespace CDocEditor
                 {
                     case GroupType.Type:
                         CTypeTreeNode typeNode = new CTypeTreeNode(new CType());
-
-                        typeNode.Nodes.Add(new GroupTreeNode(GroupType.Constants));
-                        typeNode.Nodes.Add(new GroupTreeNode(GroupType.Function));
-
                         node.Nodes.Add(typeNode);
                         control = typeNode.CreateEditor();
                         break;
@@ -147,15 +146,15 @@ namespace CDocEditor
 
         private void headerAddMenuItem_Click(object sender, EventArgs e)
         {
-            CHeaderTreeNode headerNode = new CHeaderTreeNode(new CHeaderFile());
+            CHeaderFileTreeNode headerFileNode = new CHeaderFileTreeNode(new CHeaderFile());
 
-            headerNode.Nodes.Add(new GroupTreeNode(GroupType.Type));
-            headerNode.Nodes.Add(new GroupTreeNode(GroupType.Constants));
-            headerNode.Nodes.Add(new GroupTreeNode(GroupType.Function));
+            headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Type));
+            headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Constants));
+            headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Function));
 
-            pgTree.Nodes.Add(headerNode);
+            pgTree.Nodes[0].Nodes.Add(headerFileNode);
 
-            Control control = headerNode.CreateEditor();
+            Control control = headerFileNode.CreateEditor();
 
             ChangeEditor(control);
         }
@@ -186,31 +185,20 @@ namespace CDocEditor
         public void SetData(CDocument data)
         {
             pgTree.Nodes.Clear();
+            this.cdocNode = null;
 
-            foreach (CHeaderFile header in data.Headers)
+            CDocTreeNode cdocNode = new CDocTreeNode(data);
+
+            foreach (CHeaderFile header in data.HeaderFiles)
             {
-                CHeaderTreeNode headerNode = new CHeaderTreeNode(header);
+                CHeaderFileTreeNode headerNode = new CHeaderFileTreeNode(header);
 
                 GroupTreeNode typeNode = new GroupTreeNode(GroupType.Type);
 
                 foreach (CType i in header.Types)
                 {
-                    GroupTreeNode constNode2 = new GroupTreeNode(GroupType.Constants);
-                    foreach (CConst j in i.Constants)
-                    {
-                        constNode2.Nodes.Add(new CConstantsTreeNode(j));
-                    }
-
-                    GroupTreeNode funcNode2 = new GroupTreeNode(GroupType.Function);
-                    foreach (CFunction j in i.Functions)
-                    {
-                        funcNode2.Nodes.Add(new CFunctionTreeNode(j));
-                    }
-
                     typeNode.Nodes.Add(
-                        new CTypeTreeNode(
-                            i,
-                            new TreeNode[] { constNode2, funcNode2 }));
+                        new CTypeTreeNode(i));
                 }
 
                 GroupTreeNode constNode = new GroupTreeNode(GroupType.Constants);
@@ -229,12 +217,15 @@ namespace CDocEditor
                 headerNode.Nodes.Add(constNode);
                 headerNode.Nodes.Add(funcNode);
 
-                pgTree.Nodes.Add(headerNode);
+                cdocNode.Nodes.Add(headerNode);
             }
 
+            this.cdocNode = cdocNode;
+
+            this.pgTree.Nodes.Add(cdocNode);
         }
 
-        public void GetData(CDocument data)
+        public CDocument GetData()
         {
             if (currentEditor is IPgdocEditor)
             {
@@ -242,9 +233,11 @@ namespace CDocEditor
                 editor.RefreshData();
             }
 
-            data.Headers.Clear();
+            CDocument data = cdocNode.Data;
 
-            foreach (CHeaderTreeNode headerNode in pgTree.Nodes)
+            data.HeaderFiles.Clear();
+
+            foreach (CHeaderFileTreeNode headerNode in cdocNode.Nodes)
             {
                 CHeaderFile header = headerNode.Data;
 
@@ -260,27 +253,6 @@ namespace CDocEditor
                             foreach (CTypeTreeNode typeNode in groupNode.Nodes)
                             {
                                 CType type = typeNode.Data;
-                                type.Functions.Clear();
-                                type.Constants.Clear();
-
-                                foreach (GroupTreeNode groupNode2 in typeNode.Nodes)
-                                {
-                                    switch (groupNode2.Type)
-                                    {
-                                        case GroupType.Constants:
-                                            foreach (CConstantsTreeNode constNode2 in groupNode2.Nodes)
-                                            {
-                                                type.Constants.Add(constNode2.Data);
-                                            }
-                                            break;
-                                        case GroupType.Function:
-                                            foreach (CFunctionTreeNode funcNode2 in groupNode2.Nodes)
-                                            {
-                                                type.Functions.Add(funcNode2.Data);
-                                            }
-                                            break;
-                                    }
-                                }
 
                                 header.Types.Add(type);
                             }
@@ -300,8 +272,10 @@ namespace CDocEditor
                     }
                 }
 
-                data.Headers.Add(header);
+                data.HeaderFiles.Add(header);
             }
+
+            return data;
         }
 
         private void SetMode()
@@ -326,7 +300,7 @@ namespace CDocEditor
                     editor.RefreshData();
                 }
 
-                this.splitContainer1.Panel2.Controls.Remove(currentEditor);
+                this.splitContainer.Panel2.Controls.Remove(currentEditor);
                 currentEditor.Dispose();
             }
 
@@ -335,16 +309,16 @@ namespace CDocEditor
             if (currentEditor != null)
             {
                 control.Dock = DockStyle.Fill;
-                this.splitContainer1.Panel2.Controls.Add(currentEditor);
+                this.splitContainer.Panel2.Controls.Add(currentEditor);
             }
         }
 
         private void LoadFile(string filename)
         {
             this.filename = filename;
-            this.doc = CDocument.Load(filename);
+            CDocument doc = CDocument.Load(filename);
 
-            SetData(this.doc);
+            SetData(doc);
             SetMode();
         }
 

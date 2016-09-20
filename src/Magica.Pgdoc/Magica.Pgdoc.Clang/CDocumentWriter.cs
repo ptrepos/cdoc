@@ -30,7 +30,12 @@ namespace Magica.Pgdoc.Clang
         {
             XmlElement cdocElem = xmlDoc.CreateElement("c-doc");
 
-            foreach (CHeaderFile headerFile in cdoc.Headers)
+            SetAttribute(cdocElem, "id", cdoc.Id);
+            SetAttribute(cdocElem, "name", cdoc.Name);
+            SetElement(cdocElem, "summary", cdoc.Summary);
+            SetElement(cdocElem, "description", cdoc.Description);
+
+            foreach (CHeaderFile headerFile in cdoc.HeaderFiles)
             {
                 cdocElem.AppendChild(ConvertHeader(xmlDoc, headerFile));
             }
@@ -80,16 +85,6 @@ namespace Magica.Pgdoc.Clang
                 elem.AppendChild(ConvertTypeField(xmlDoc, field));
             }
             SetElement(elem, "description", type.Description);
-
-            foreach (CConst constants in type.Constants)
-            {
-                elem.AppendChild(ConvertConst(xmlDoc, constants));
-            }
-
-            foreach (CFunction function in type.Functions)
-            {
-                elem.AppendChild(ConvertFunction(xmlDoc, function));
-            }
 
             return elem;
         }

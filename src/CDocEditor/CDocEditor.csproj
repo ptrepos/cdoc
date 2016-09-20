@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CDocEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CDocEditor.Designer.cs">
+      <DependentUpon>CDocEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,6 +92,9 @@
     <Compile Include="CTypeEditor.Designer.cs">
       <DependentUpon>CTypeEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CDocEditor.resx">
+      <DependentUpon>CDocEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MessageResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MessageResource.Designer.cs</LastGenOutput>

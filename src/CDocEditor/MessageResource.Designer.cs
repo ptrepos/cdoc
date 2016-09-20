@@ -63,9 +63,9 @@ namespace CDocEditor {
         /// <summary>
         ///   定数 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Constants {
+        internal static string Const {
             get {
-                return ResourceManager.GetString("Constants", resourceCulture);
+                return ResourceManager.GetString("Const", resourceCulture);
             }
         }
         
@@ -75,6 +75,15 @@ namespace CDocEditor {
         internal static string Function {
             get {
                 return ResourceManager.GetString("Function", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ライブラリ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Library {
+            get {
+                return ResourceManager.GetString("Library", resourceCulture);
             }
         }
         
