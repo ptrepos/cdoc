@@ -7,11 +7,11 @@ using Magica.Pgdoc.Clang;
 
 namespace CDocEditor
 {
-    public partial class CDocEditor : UserControl, IPgdocEditor
+    public partial class CConstEditor : UserControl, IPgdocEditor
     {
-        private CDocTreeNode node;
+        private CConstTreeNode node;
 
-        public CDocEditor(CDocTreeNode node)
+        public CConstEditor(CConstTreeNode node)
         {
             InitializeComponent();
 
@@ -30,6 +30,7 @@ namespace CDocEditor
         public void SetData()
         {
             nameBox.Text = this.node.Data.Name;
+            typeBox.Text = this.node.Data.Type;
             summaryBox.Text = this.node.Data.Summary;
             descriptionBox.Text = this.node.Data.Description;
         }
@@ -37,10 +38,11 @@ namespace CDocEditor
         public void GetData()
         {
             this.node.Data.Name = nameBox.Text;
+            this.node.Data.Type = typeBox.Text;
             this.node.Data.Summary = summaryBox.Text;
             this.node.Data.Description = descriptionBox.Text;
 
-            this.node.Text = nameBox.Text;
+            this.node.Text = this.node.Data.Name;
         }
 
         private void nameBox_Validated(object sender, EventArgs e)

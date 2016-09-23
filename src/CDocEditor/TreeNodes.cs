@@ -7,12 +7,17 @@ namespace CDocEditor
 {
     public interface IPgTreeNode
     {
-        Control CreateEditor();
+        IPgdocEditor CreateEditor();
     }
 
     public interface IPgdocEditor
     {
-        void RefreshData();
+        Control Control { get; }
+
+        void FocusControl();
+
+        void SetData();
+        void GetData();
     }
 
     public enum GroupType
@@ -47,7 +52,7 @@ namespace CDocEditor
             this.data = data;
         }
 
-        public Control CreateEditor()
+        public IPgdocEditor CreateEditor()
         {
             CDocEditor editor = new CDocEditor(this);
 
@@ -85,9 +90,9 @@ namespace CDocEditor
             this.data = data;
         }
 
-        public Control CreateEditor()
+        public IPgdocEditor CreateEditor()
         {
-            Control editor = new CHeaderEditor(this);
+            CHeaderEditor editor = new CHeaderEditor(this);
 
             return editor;
         }
@@ -155,9 +160,9 @@ namespace CDocEditor
             this.data = data;
         }
 
-        public Control CreateEditor()
+        public IPgdocEditor CreateEditor()
         {
-            Control editor = new CTypeEditor(this);
+            CTypeEditor editor = new CTypeEditor(this);
 
             return editor;
         }
@@ -197,7 +202,7 @@ namespace CDocEditor
             this.data = data;
         }
 
-        public Control CreateEditor()
+        public IPgdocEditor CreateEditor()
         {
             CFunctionEditor editor = new CFunctionEditor(this);
 
@@ -214,7 +219,7 @@ namespace CDocEditor
         }
     }
 
-    public class CConstantsTreeNode : TreeNode, IPgTreeNode
+    public class CConstTreeNode : TreeNode, IPgTreeNode
     {
         private CConst data;
 
@@ -223,32 +228,32 @@ namespace CDocEditor
             get { return data; }
         }
 
-        public CConstantsTreeNode()
+        public CConstTreeNode()
         {
         }
 
-        public CConstantsTreeNode(CConst data)
+        public CConstTreeNode(CConst data)
                 : base(data.Name)
         {
             this.data = data;
         }
 
-        public CConstantsTreeNode(CConst data, TreeNode[] children)
+        public CConstTreeNode(CConst data, TreeNode[] children)
                 : base(data.Name, children)
         {
             this.data = data;
         }
 
-        public Control CreateEditor()
+        public IPgdocEditor CreateEditor()
         {
-            CConstantsEditor editor = new CConstantsEditor(this);
+            CConstEditor editor = new CConstEditor(this);
 
             return editor;
         }
 
         public override object Clone()
         {
-            CConstantsTreeNode view = (CConstantsTreeNode)base.Clone();
+            CConstTreeNode view = (CConstTreeNode)base.Clone();
 
             view.data = (CConst)data.Clone();
 

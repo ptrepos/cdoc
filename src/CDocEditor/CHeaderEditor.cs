@@ -16,14 +16,26 @@ namespace CDocEditor
         {
             InitializeComponent();
 
-            this.node = node;
+            FormUtil.AutoTabIndex(this);
 
+            this.node = node;
+        }
+
+        public Control Control { get { return this; } }
+
+        public void FocusControl()
+        {
+            nameBox.Focus();
+        }
+
+        public void SetData()
+        {
             nameBox.Text = this.node.Data.Name;
             summaryBox.Text = this.node.Data.Summary;
             remarksBox.Text = this.node.Data.Description;
         }
 
-        public void RefreshData()
+        public void GetData()
         {
             this.node.Data.Name = nameBox.Text;
             this.node.Data.Summary = summaryBox.Text;
@@ -34,7 +46,7 @@ namespace CDocEditor
 
         private void nameBox_Validated(object sender, EventArgs e)
         {
-            RefreshData();
+            GetData();
         }
     }
 }

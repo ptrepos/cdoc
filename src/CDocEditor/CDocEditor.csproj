@@ -54,6 +54,7 @@
     <Compile Include="CDocEditor.Designer.cs">
       <DependentUpon>CDocEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormUtil.cs" />
     <Compile Include="MessageResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -74,11 +75,11 @@
       <DependentUpon>CFunctionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeNodes.cs" />
-    <Compile Include="CConstantsEditor.cs">
+    <Compile Include="CConstEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CConstantsEditor.Designer.cs">
-      <DependentUpon>CConstantsEditor.cs</DependentUpon>
+    <Compile Include="CConstEditor.Designer.cs">
+      <DependentUpon>CConstEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="CHeaderEditor.cs">
       <SubType>UserControl</SubType>
@@ -114,8 +115,8 @@
     <EmbeddedResource Include="CFunctionEditor.resx">
       <DependentUpon>CFunctionEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CConstantsEditor.resx">
-      <DependentUpon>CConstantsEditor.cs</DependentUpon>
+    <EmbeddedResource Include="CConstEditor.resx">
+      <DependentUpon>CConstEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CHeaderEditor.resx">
       <DependentUpon>CHeaderEditor.cs</DependentUpon>

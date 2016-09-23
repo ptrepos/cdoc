@@ -15,7 +15,6 @@ namespace Magica.Pgdoc.Clang
 
         private List<CHeaderFile> headerFiles = new List<CHeaderFile>();
 
-        public string Id { get; set; }
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
@@ -35,7 +34,7 @@ namespace Magica.Pgdoc.Clang
 
         public static CDocument Load(TextReader reader)
         {
-            CDocumentReader docReader = new CDocumentReader();
+            CDocReader docReader = new CDocReader();
             return docReader.Read(reader);
         }
 
@@ -49,7 +48,7 @@ namespace Magica.Pgdoc.Clang
 
         public void Save(TextWriter writer)
         {
-            CDocumentWriter docWriter = new CDocumentWriter();
+            CDocWriter docWriter = new CDocWriter();
             docWriter.Write(writer, this);
         }
 

@@ -15,10 +15,22 @@ namespace CDocEditor
         {
             InitializeComponent();
 
+            FormUtil.AutoTabIndex(this);
+
             InitializeComboBox();
 
             this.node = node;
+        }
 
+        public Control Control { get { return this; } }
+
+        public void FocusControl()
+        {
+            nameBox.Focus();
+        }
+
+        public void SetData()
+        {
             nameBox.Text = this.node.Data.Name;
             typeBox.SelectedValue = this.node.Data.Kind;
             summaryBox.Text = this.node.Data.Summary;
@@ -29,7 +41,7 @@ namespace CDocEditor
             remarksBox.Text = this.node.Data.Description;
         }
 
-        public void RefreshData()
+        public void GetData()
         {
             this.node.Data.Name = nameBox.Text;
             this.node.Data.Kind = (TypeKind)typeBox.SelectedValue;
@@ -52,7 +64,7 @@ namespace CDocEditor
 
         private void nameBox_Validated(object sender, EventArgs e)
         {
-            RefreshData();
+            GetData();
         }
 
         private void InitializeComboBox()

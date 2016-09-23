@@ -10,7 +10,7 @@ namespace Magica.Pgdoc.Clang
     {
         private List<CType> types = new List<CType>();
         private List<CFunction> functions = new List<CFunction>();
-        private List<CConst> constants = new List<CConst>();
+        private List<CConst> consts = new List<CConst>();
 
         public string Name { get; set; }
         public string Summary { get; set; }
@@ -26,9 +26,9 @@ namespace Magica.Pgdoc.Clang
             get { return functions; }
         }
 
-        public List<CConst> Constants
+        public List<CConst> Consts
         {
-            get { return constants; }
+            get { return consts; }
         }
 
         public object Clone()
@@ -37,7 +37,7 @@ namespace Magica.Pgdoc.Clang
 
             def.types = ListUtil.Clone(def.types);
             def.functions = ListUtil.Clone(def.functions);
-            def.constants = ListUtil.Clone(def.constants);
+            def.consts = ListUtil.Clone(def.consts);
 
             return def;
         }

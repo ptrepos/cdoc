@@ -12,15 +12,16 @@ namespace CDocEditor
         private CDocTreeNode cdocNode;
 
         private string filename = null;
-        private Control currentEditor = null;
+        private IPgdocEditor currentEditor = null;
 
         public CDocEditorForm()
         {
             InitializeComponent();
 
+            FormUtil.AutoTabIndex(this);
+
             CDocument doc = new CDocument();
-            doc.Id = "lib1";
-            doc.Name = "library-1";
+            doc.Name = "LIBRARY 1";
 
             SetData(doc);
         }
@@ -32,153 +33,254 @@ namespace CDocEditor
 
         private void fileOpenMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                LoadFile(dialog.FileName);
+                OpenFileDialog dialog = new OpenFileDialog();
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    LoadFile(dialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
             }
         }
 
         private void fileSaveMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                CDocument doc = GetData();
+                SaveFileDialog dialog = new SaveFileDialog();
 
-                doc.Save(dialog.FileName);
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    CDocument doc = GetData();
 
-                this.filename = dialog.FileName;
+                    doc.Save(dialog.FileName);
 
-                SetMode();
+                    this.filename = dialog.FileName;
+
+                    SetMode();
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
             }
 
         }
 
         private void fileSaveOverrideMenuItem_Click(object sender, EventArgs e)
         {
-            CDocument doc = GetData();
+            try
+            {
+                CDocument doc = GetData();
 
-            doc.Save(this.filename);
+                doc.Save(this.filename);
 
-            SetMode();
+                SetMode();
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
+            }
+
         }
 
         private void PgdocEditorForm_DragEnter(object sender, DragEventArgs e)
         {
-            object obj = e.Data.GetData("FileNameW");
-            if (obj == null)
-                return;
-
-            string[] fileNames = ((string[])obj);
-            foreach (string fileName in fileNames)
+            try
             {
-                if (fileName.EndsWith(CDocument.FileExtension))
+                object obj = e.Data.GetData("FileNameW");
+                if (obj == null)
+                    return;
+
+                string[] fileNames = ((string[])obj);
+                foreach (string fileName in fileNames)
                 {
-                    e.Effect = DragDropEffects.Copy;
-                    break;
+                    if (fileName.EndsWith(CDocument.FileExtension))
+                    {
+                        e.Effect = DragDropEffects.Copy;
+                        break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
             }
         }
 
         private void PgdocEditorForm_DragDrop(object sender, DragEventArgs e)
         {
-            object obj = e.Data.GetData("FileNameW");
-            if (obj == null)
-                return;
-
-            string[] fileNames = ((string[])obj);
-            foreach (string fileName in fileNames)
+            try
             {
-                if (fileName.EndsWith(CDocument.FileExtension))
+                object obj = e.Data.GetData("FileNameW");
+                if (obj == null)
+                    return;
+
+                string[] fileNames = ((string[])obj);
+                foreach (string fileName in fileNames)
                 {
-                    LoadFile(fileName);
-                    break;
+                    if (fileName.EndsWith(CDocument.FileExtension))
+                    {
+                        LoadFile(fileName);
+                        break;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
             }
         }
 
 
         private void addMenuItem_Click(object sender, EventArgs e)
         {
-            if (pgTree.SelectedNode is GroupTreeNode)
+            try
             {
-                GroupTreeNode node = (GroupTreeNode)pgTree.SelectedNode;
-
-                Control control = null;
-                switch (node.Type)
+                if (pgTree.SelectedNode is GroupTreeNode)
                 {
-                    case GroupType.Type:
-                        CTypeTreeNode typeNode = new CTypeTreeNode(new CType());
-                        node.Nodes.Add(typeNode);
-                        control = typeNode.CreateEditor();
-                        break;
-                    case GroupType.Constants:
-                        CConstantsTreeNode constNode = new CConstantsTreeNode(new CConst());
-                        node.Nodes.Add(constNode);
-                        control = constNode.CreateEditor();
-                        break;
-                    case GroupType.Function:
-                        CFunctionTreeNode funcNode = new CFunctionTreeNode(new CFunction());
-                        node.Nodes.Add(funcNode);
-                        control = funcNode.CreateEditor();
-                        break;
-                }
+                    GroupTreeNode node = (GroupTreeNode)pgTree.SelectedNode;
 
-                ChangeEditor(control);
+                    IPgdocEditor control = null;
+                    switch (node.Type)
+                    {
+                        case GroupType.Type:
+                            CTypeTreeNode typeNode = new CTypeTreeNode(new CType());
+                            node.Nodes.Add(typeNode);
+                            control = typeNode.CreateEditor();
+                            break;
+                        case GroupType.Constants:
+                            CConstTreeNode constNode = new CConstTreeNode(new CConst());
+                            node.Nodes.Add(constNode);
+                            control = constNode.CreateEditor();
+                            break;
+                        case GroupType.Function:
+                            CFunctionTreeNode funcNode = new CFunctionTreeNode(new CFunction());
+                            node.Nodes.Add(funcNode);
+                            control = funcNode.CreateEditor();
+                            break;
+                    }
+
+                    ChangeEditor(control);
+
+                    node.Parent.Expand();
+                    node.Expand();
+                    pgTree.SelectedNode = node;
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
             }
         }
 
         private void deleteMenuItem_Click(object sender, EventArgs e)
         {
-            if (pgTree.SelectedNode.Parent == null)
+            try
             {
-                pgTree.Nodes.Remove(pgTree.SelectedNode);
+                if (pgTree.SelectedNode.Parent == null)
+                {
+                    pgTree.Nodes.Remove(pgTree.SelectedNode);
+                }
+                else
+                {
+                    pgTree.SelectedNode.Parent.Nodes.Remove(pgTree.SelectedNode);
+                }
+                ChangeEditor(null);
+
             }
-            else
+            catch (Exception ex)
             {
-                pgTree.SelectedNode.Parent.Nodes.Remove(pgTree.SelectedNode);
+                FormUtil.ShowException(this, ex);
             }
-            ChangeEditor(null);
         }
 
         private void headerAddMenuItem_Click(object sender, EventArgs e)
         {
-            CHeaderFileTreeNode headerFileNode = new CHeaderFileTreeNode(new CHeaderFile());
+            try
+            {
+                CHeaderFileTreeNode headerFileNode = new CHeaderFileTreeNode(new CHeaderFile());
 
-            headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Type));
-            headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Constants));
-            headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Function));
+                headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Type));
+                headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Constants));
+                headerFileNode.Nodes.Add(new GroupTreeNode(GroupType.Function));
 
-            pgTree.Nodes[0].Nodes.Add(headerFileNode);
+                pgTree.Nodes[0].Nodes.Add(headerFileNode);
 
-            Control control = headerFileNode.CreateEditor();
+                IPgdocEditor control = headerFileNode.CreateEditor();
 
-            ChangeEditor(control);
+                headerFileNode.Parent.Expand();
+                headerFileNode.Expand();
+                pgTree.SelectedNode = headerFileNode;
+
+                ChangeEditor(control);
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
+            }
         }
 
         private void treeContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (pgTree.SelectedNode is GroupTreeNode)
+            try
             {
-                addMenuItem.Enabled = true;
-                deleteMenuItem.Enabled = false;
+                if (pgTree.SelectedNode is GroupTreeNode)
+                {
+                    addMenuItem.Enabled = true;
+                    deleteMenuItem.Enabled = false;
+                }
+                else if (pgTree.SelectedNode is CDocTreeNode)
+                {
+                    addMenuItem.Enabled = false;
+                    deleteMenuItem.Enabled = false;
+                }
+                else
+                {
+                    addMenuItem.Enabled = false;
+                    deleteMenuItem.Enabled = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                addMenuItem.Enabled = false;
-                deleteMenuItem.Enabled = true;
+                FormUtil.ShowException(this, ex);
             }
         }
 
         private void pgTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (pgTree.SelectedNode is IPgTreeNode)
+            try
             {
-                IPgTreeNode node = (IPgTreeNode)pgTree.SelectedNode;
-                ChangeEditor(node.CreateEditor());
+                if (pgTree.SelectedNode is IPgTreeNode)
+                {
+                    IPgTreeNode node = (IPgTreeNode)pgTree.SelectedNode;
+                    ChangeEditor(node.CreateEditor());
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
+            }
+        }
+
+        private void pgTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            try
+            {
+                if (e.Node is IPgTreeNode)
+                {
+                    IPgTreeNode node = (IPgTreeNode)e.Node;
+                    ChangeEditor(node.CreateEditor());
+                }
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
             }
         }
 
@@ -202,9 +304,9 @@ namespace CDocEditor
                 }
 
                 GroupTreeNode constNode = new GroupTreeNode(GroupType.Constants);
-                foreach (CConst j in header.Constants)
+                foreach (CConst j in header.Consts)
                 {
-                    constNode.Nodes.Add(new CConstantsTreeNode(j));
+                    constNode.Nodes.Add(new CConstTreeNode(j));
                 }
 
                 GroupTreeNode funcNode = new GroupTreeNode(GroupType.Function);
@@ -230,7 +332,7 @@ namespace CDocEditor
             if (currentEditor is IPgdocEditor)
             {
                 IPgdocEditor editor = (IPgdocEditor)currentEditor;
-                editor.RefreshData();
+                editor.GetData();
             }
 
             CDocument data = cdocNode.Data;
@@ -242,7 +344,7 @@ namespace CDocEditor
                 CHeaderFile header = headerNode.Data;
 
                 header.Types.Clear();
-                header.Constants.Clear();
+                header.Consts.Clear();
                 header.Functions.Clear();
 
                 foreach (GroupTreeNode groupNode in headerNode.Nodes)
@@ -258,9 +360,9 @@ namespace CDocEditor
                             }
                             break;
                         case GroupType.Constants:
-                            foreach (CConstantsTreeNode constNode in groupNode.Nodes)
+                            foreach (CConstTreeNode constNode in groupNode.Nodes)
                             {
-                                header.Constants.Add(constNode.Data);
+                                header.Consts.Add(constNode.Data);
                             }
                             break;
                         case GroupType.Function:
@@ -290,26 +392,26 @@ namespace CDocEditor
             }
         }
 
-        private void ChangeEditor(Control control)
+        private void ChangeEditor(IPgdocEditor control)
         {
             if (currentEditor != null)
             {
-                if (currentEditor is IPgdocEditor)
-                {
-                    IPgdocEditor editor = (IPgdocEditor)currentEditor;
-                    editor.RefreshData();
-                }
+                currentEditor.GetData();
 
-                this.splitContainer.Panel2.Controls.Remove(currentEditor);
-                currentEditor.Dispose();
+                this.splitContainer.Panel2.Controls.Remove(currentEditor.Control);
+                currentEditor.Control.Dispose();
             }
 
             currentEditor = control;
 
             if (currentEditor != null)
             {
-                control.Dock = DockStyle.Fill;
-                this.splitContainer.Panel2.Controls.Add(currentEditor);
+                currentEditor.SetData();
+
+                currentEditor.Control.Dock = DockStyle.Fill;
+                this.splitContainer.Panel2.Controls.Add(currentEditor.Control);
+
+                currentEditor.FocusControl();
             }
         }
 
@@ -332,7 +434,7 @@ namespace CDocEditor
             o = obj.GetData(typeof(CFunctionTreeNode));
             if (o != null)
                 return (TreeNode)o;
-            o = obj.GetData(typeof(CConstantsTreeNode));
+            o = obj.GetData(typeof(CConstTreeNode));
             if (o != null)
                 return (TreeNode)o;
 
@@ -420,5 +522,6 @@ namespace CDocEditor
                 }
             }
         }
+
     }
 }

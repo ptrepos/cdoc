@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Magica.Pgdoc.Clang\CDocumentWriter.cs" />
-    <Compile Include="Magica.Pgdoc.Clang\CDocumentReader.cs" />
+    <Compile Include="Magica.Pgdoc.Clang\CDocWriter.cs" />
+    <Compile Include="Magica.Pgdoc.Clang\CDocReader.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CDocument.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CFunction.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CHeaderFile.cs" />
@@ -50,19 +50,8 @@
     <Compile Include="Magica.Pgdoc.Clang\CType.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CConst.cs" />
     <Compile Include="ListUtil.cs" />
-    <Compile Include="Magica.Pgdoc.Clang\TextResource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TextResource.resx</DependentUpon>
-    </Compile>
     <Compile Include="Magica.Pgdoc.Clang\TypeKind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Magica.Pgdoc.Clang\TextResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>TextResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

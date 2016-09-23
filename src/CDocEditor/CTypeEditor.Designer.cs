@@ -70,10 +70,10 @@
             // 
             // remarksLabel
             // 
-            this.remarksLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.remarksLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.remarksLabel.AutoSize = true;
-            this.remarksLabel.Location = new System.Drawing.Point(64, 306);
+            this.remarksLabel.Location = new System.Drawing.Point(64, 284);
             this.remarksLabel.Name = "remarksLabel";
             this.remarksLabel.Size = new System.Drawing.Size(29, 12);
             this.remarksLabel.TabIndex = 35;
