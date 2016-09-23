@@ -327,6 +327,8 @@ namespace CDocEditor
             this.cdocNode = cdocNode;
 
             this.pgTree.Nodes.Add(cdocNode);
+
+            this.pgTree.ExpandAll();
         }
 
         public CDocument GetData()
