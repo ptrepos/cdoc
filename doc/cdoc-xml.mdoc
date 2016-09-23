@@ -15,7 +15,6 @@ XMLファイルはプログラムAPIの仕様に従って構造化されてお�
 ## XML構造
 
 + c-doc(要素:ドキュメントルート)
-	- id(属性:ライブラリID)
 	+ name(要素:ライブラリ名称)
 	+ summary(要素:概要)
 	+ description(要素:説明)
@@ -53,8 +52,7 @@ XMLファイルはプログラムAPIの仕様に従って構造化されてお�
 ライブラリの情報を記述します。
 
 ### 記入例
-	<c-doc id="library">
-		<name>概要</name>
+	<c-doc name="ライブラリ名">
 		<summary>概要</summary>
 		<description></description>
 		
