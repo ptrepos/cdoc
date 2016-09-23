@@ -289,6 +289,8 @@ namespace CDocEditor
             pgTree.Nodes.Clear();
             this.cdocNode = null;
 
+            ChangeEditor(null);
+
             CDocTreeNode cdocNode = new CDocTreeNode(data);
 
             foreach (CHeaderFile header in data.HeaderFiles)
@@ -329,10 +331,9 @@ namespace CDocEditor
 
         public CDocument GetData()
         {
-            if (currentEditor is IPgdocEditor)
+            if (currentEditor != null)
             {
-                IPgdocEditor editor = (IPgdocEditor)currentEditor;
-                editor.GetData();
+                currentEditor.GetData();
             }
 
             CDocument data = cdocNode.Data;
