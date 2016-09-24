@@ -3,6 +3,10 @@ body
 	font-family: helvetica, arial, 'hiragino kaku gothic pro', meiryo, 'ms pgothic', sans-serif;
 }
 
+a {
+	color: #0000FF;
+}
+
 #main 
 {
 	width: 1024px;

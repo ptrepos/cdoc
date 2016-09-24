@@ -355,22 +355,22 @@ namespace Magica.Pgdoc.Clang
 
         private string GetPath(CHeaderFile obj)
         {
-            return "head-" + EscapeUrl(obj.Name) + ".html";
+            return "h-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string GetPath(CType obj)
         {
-            return "type-" + EscapeUrl(obj.Name) + ".html";
+            return "t-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string GetPath(CConst obj)
         {
-            return "const-" + EscapeUrl(obj.Name) + ".html";
+            return "c-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string GetPath(CFunction obj)
         {
-            return "function-" + EscapeUrl(obj.Name) + ".html";
+            return "f-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string EscapeUrl(string text)
