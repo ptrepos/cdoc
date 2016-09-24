@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using Mdoc;
 
 namespace Magica.Pgdoc.Clang
 {
@@ -78,8 +78,10 @@ namespace Magica.Pgdoc.Clang
             foreach (CHeaderFile headerFile in doc.HeaderFiles)
             {
                 builder.AppendFormat("<li><a href=\"{1}\">{0}</a>", Escape(headerFile.Name), GetPath(headerFile));
+                builder.AppendLine("<ul>");
                 if (headerFile.Types.Count > 0)
                 {
+                    builder.AppendLine("<li>型</li>");
                     builder.AppendLine("<ul>");
                     foreach (CType type in headerFile.Types)
                     {
@@ -89,6 +91,7 @@ namespace Magica.Pgdoc.Clang
                 }
                 if (headerFile.Consts.Count > 0)
                 {
+                    builder.AppendLine("<li>定数</li>");
                     builder.AppendLine("<ul>");
                     foreach (CConst _const in headerFile.Consts)
                     {
@@ -98,6 +101,7 @@ namespace Magica.Pgdoc.Clang
                 }
                 if (headerFile.Functions.Count > 0)
                 {
+                    builder.AppendLine("<li>関数</li>");
                     builder.AppendLine("<ul>");
                     foreach (CFunction function in headerFile.Functions)
                     {
@@ -105,6 +109,7 @@ namespace Magica.Pgdoc.Clang
                     }
                     builder.AppendLine("</ul>");
                 }
+                builder.AppendLine("</ul>");
                 builder.Append("</li>");
             }
             builder.AppendLine("</ul>");
@@ -120,12 +125,12 @@ namespace Magica.Pgdoc.Clang
             if (!string.IsNullOrEmpty(doc.Summary))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "概要");
-                builder.AppendLine(ProcessMdoc(doc.Summary));
+                builder.AppendLine(EncodeMdoc(doc.Summary));
             }
             if (!string.IsNullOrEmpty(doc.Description))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "説明");
-                builder.AppendLine(ProcessMdoc(doc.Description));
+                builder.AppendLine(EncodeMdoc(doc.Description));
             }
 
             builder.AppendFormat("<h2>{0}</h2>", "ヘッダ");
@@ -142,7 +147,7 @@ namespace Magica.Pgdoc.Clang
                 builder.AppendLine("<tr>");
                 builder.AppendFormat("<td class=\"name\"><a href=\"{1}\">{0}</a></td>", Escape(i.Name), GetPath(i));
                 builder.AppendLine("<td class=\"summary\">");
-                builder.AppendLine(ProcessMdoc(i.Summary));
+                builder.AppendLine(EncodeMdoc(i.Summary));
                 builder.AppendLine("</td>");
                 builder.AppendLine("</tr>");
             }
@@ -160,12 +165,12 @@ namespace Magica.Pgdoc.Clang
             if (!string.IsNullOrEmpty(headerFile.Summary))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "概要");
-                builder.AppendLine(ProcessMdoc(headerFile.Summary));
+                builder.AppendLine(EncodeMdoc(headerFile.Summary));
             }
             if (!string.IsNullOrEmpty(headerFile.Description))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "説明");
-                builder.AppendLine(ProcessMdoc(headerFile.Description));
+                builder.AppendLine(EncodeMdoc(headerFile.Description));
             }
 
             if (headerFile.Types.Count > 0)
@@ -184,7 +189,7 @@ namespace Magica.Pgdoc.Clang
                     builder.AppendLine("<tr>");
                     builder.AppendFormat("<td class=\"name\"><a href=\"{2}\">{0}{1}</a></td>", Escape(i.Name), EncodeTypeKind(i.Kind), GetPath(i));
                     builder.AppendLine("<td class=\"summary\">");
-                    builder.AppendLine(ProcessMdoc(i.Summary));
+                    builder.AppendLine(EncodeMdoc(i.Summary));
                     builder.AppendLine("</td>");
                     builder.AppendLine("</tr>");
                 }
@@ -208,7 +213,7 @@ namespace Magica.Pgdoc.Clang
                     builder.AppendLine("<tr>");
                     builder.AppendFormat("<td class=\"name\"><a href=\"{1}\">{0}</a></td>", Escape(i.Name), GetPath(i));
                     builder.AppendLine("<td class=\"summary\">");
-                    builder.AppendLine(ProcessMdoc(i.Summary));
+                    builder.AppendLine(EncodeMdoc(i.Summary));
                     builder.AppendLine("</td>");
                     builder.AppendLine("</tr>");
                 }
@@ -233,7 +238,7 @@ namespace Magica.Pgdoc.Clang
                     builder.AppendLine("<tr>");
                     builder.AppendFormat("<td class=\"name\"><a href=\"{1}\">{0}</a></td>", Escape(i.Name), GetPath(i));
                     builder.AppendLine("<td class=\"summary\">");
-                    builder.AppendLine(ProcessMdoc(i.Summary));
+                    builder.AppendLine(EncodeMdoc(i.Summary));
                     builder.AppendLine("</td>");
                     builder.AppendLine("</tr>");
                 }
@@ -252,7 +257,7 @@ namespace Magica.Pgdoc.Clang
             if (!string.IsNullOrEmpty(type.Summary))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "概要");
-                builder.AppendLine(ProcessMdoc(type.Summary));
+                builder.AppendLine(EncodeMdoc(type.Summary));
             }
             if (!string.IsNullOrEmpty(type.Definition))
             {
@@ -267,7 +272,7 @@ namespace Magica.Pgdoc.Clang
                 {
                     builder.AppendFormat("<dt>{0}</dt>", Escape(f.Name));
                     builder.AppendLine("<dd>");
-                    builder.AppendLine(ProcessMdoc(f.Description));
+                    builder.AppendLine(EncodeMdoc(f.Description));
                     builder.AppendLine("</dd>");
                 }
                 builder.AppendLine("</dl>");
@@ -275,7 +280,7 @@ namespace Magica.Pgdoc.Clang
             if (!string.IsNullOrEmpty(type.Description))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "説明");
-                builder.AppendLine(ProcessMdoc(type.Description));
+                builder.AppendLine(EncodeMdoc(type.Description));
             }
 
             return builder.ToString();
@@ -289,7 +294,7 @@ namespace Magica.Pgdoc.Clang
             if (!string.IsNullOrEmpty(function.Summary))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "概要");
-                builder.AppendLine(ProcessMdoc(function.Summary));
+                builder.AppendLine(EncodeMdoc(function.Summary));
             }
 
             if (!string.IsNullOrEmpty(function.Definition))
@@ -305,7 +310,7 @@ namespace Magica.Pgdoc.Clang
                 {
                     builder.AppendFormat("<dt>{0}</dt>", Escape(p.Name));
                     builder.AppendLine("<dd>");
-                    builder.AppendLine(ProcessMdoc(p.Description));
+                    builder.AppendLine(EncodeMdoc(p.Description));
                     builder.AppendLine("</dd>");
                 }
                 builder.AppendLine("</dl>");
@@ -313,12 +318,12 @@ namespace Magica.Pgdoc.Clang
             if (!string.IsNullOrEmpty(function.Return))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "戻り値");
-                builder.AppendLine(ProcessMdoc(function.Return));
+                builder.AppendLine(EncodeMdoc(function.Return));
             }
             if (!string.IsNullOrEmpty(function.Description))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "説明");
-                builder.AppendLine(ProcessMdoc(function.Description));
+                builder.AppendLine(EncodeMdoc(function.Description));
             }
 
             return builder.ToString();
@@ -332,12 +337,12 @@ namespace Magica.Pgdoc.Clang
             if (!string.IsNullOrEmpty(_const.Summary))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "概要");
-                builder.AppendLine(ProcessMdoc(_const.Summary));
+                builder.AppendLine(EncodeMdoc(_const.Summary));
             }
             if (!string.IsNullOrEmpty(_const.Description))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "説明");
-                builder.AppendLine(ProcessMdoc(_const.Description));
+                builder.AppendLine(EncodeMdoc(_const.Description));
             }
 
             return builder.ToString();
@@ -350,22 +355,22 @@ namespace Magica.Pgdoc.Clang
 
         private string GetPath(CHeaderFile obj)
         {
-            return EscapeUrl(obj.Name) + ".html";
+            return "head-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string GetPath(CType obj)
         {
-            return EscapeUrl(obj.Name) + ".html";
+            return "type-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string GetPath(CConst obj)
         {
-            return EscapeUrl(obj.Name) + ".html";
+            return "const-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string GetPath(CFunction obj)
         {
-            return EscapeUrl(obj.Name) + ".html";
+            return "function-" + EscapeUrl(obj.Name) + ".html";
         }
 
         private string EscapeUrl(string text)
@@ -391,12 +396,29 @@ namespace Magica.Pgdoc.Clang
 
         private string Escape(string text)
         {
-            return text;
+            StringBuilder builder = new StringBuilder(text);
+            builder.Replace("&", "&amp;");
+            builder.Replace("'", "&quot;");
+            builder.Replace("<", "&lt;");
+            builder.Replace(">", "&gt;");
+            return builder.ToString();
         }
 
-        private string ProcessMdoc(string text)
+        private string EncodeMdoc(string text)
         {
-            return text;
+            StringReader reader = new StringReader(text);
+            StringWriter writer = new StringWriter();
+            StringWriter messageWriter = new StringWriter();
+
+            HtmlEncodeParameters parameters = new HtmlEncodeParameters();
+            parameters.HeaderIncludes = false;
+
+            MdocTool.EncodeHtml(writer, reader, messageWriter, parameters);
+
+            string message = messageWriter.ToString();
+            if (message.Length > 0)
+                throw new PgdocException(message);
+            return writer.ToString();
         }
     }
 }

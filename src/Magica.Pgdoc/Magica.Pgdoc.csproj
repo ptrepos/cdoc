@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mdoc">
+      <HintPath>..\lib\Mdoc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,13 +53,14 @@
     <Compile Include="Magica.Pgdoc.Clang\CTypeField.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CType.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CConst.cs" />
-    <Compile Include="ListUtil.cs" />
     <Compile Include="Magica.Pgdoc.Clang\TextResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Magica.Pgdoc.Clang\TypeKind.cs" />
+    <Compile Include="Magica.Pgdoc\ListUtil.cs" />
+    <Compile Include="Magica.Pgdoc\PgdocException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +68,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TextResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="style\doc.css" />
+    <Content Include="style\hyphen.png" />
+    <Content Include="style\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
