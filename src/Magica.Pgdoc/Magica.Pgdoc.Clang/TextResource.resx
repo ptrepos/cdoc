@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CConstants" xml:space="preserve">
-    <value>[定数]{0}</value>
+  <data name="Enum" xml:space="preserve">
+    <value>列挙体</value>
   </data>
-  <data name="CFunction" xml:space="preserve">
-    <value>[関数]{0}</value>
+  <data name="Struct" xml:space="preserve">
+    <value>構造体</value>
   </data>
-  <data name="CType" xml:space="preserve">
-    <value>{0}{1}</value>
+  <data name="Typedef" xml:space="preserve">
+    <value>別名</value>
+  </data>
+  <data name="Union" xml:space="preserve">
+    <value>共用体</value>
   </data>
 </root>

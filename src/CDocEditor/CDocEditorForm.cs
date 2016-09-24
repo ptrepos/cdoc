@@ -89,6 +89,27 @@ namespace CDocEditor
 
         }
 
+        private void htmlEncodeMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                if (dialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                CDocument doc = GetData();
+
+                CDocHtmlEncoder docEncoder = new CDocHtmlEncoder();
+                docEncoder.Encode(dialog.SelectedPath, doc);
+            }
+            catch (Exception ex)
+            {
+                FormUtil.ShowException(this, ex);
+            }
+        }
+
         private void PgdocEditorForm_DragEnter(object sender, DragEventArgs e)
         {
             try
@@ -525,6 +546,5 @@ namespace CDocEditor
                 }
             }
         }
-
     }
 }

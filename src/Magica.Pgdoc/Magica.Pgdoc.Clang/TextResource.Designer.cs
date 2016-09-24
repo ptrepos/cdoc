@@ -61,29 +61,38 @@ namespace Magica.Pgdoc.Clang {
         }
         
         /// <summary>
-        ///   [定数]{0} に類似しているローカライズされた文字列を検索します。
+        ///   列挙体 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CConstants {
+        internal static string Enum {
             get {
-                return ResourceManager.GetString("CConstants", resourceCulture);
+                return ResourceManager.GetString("Enum", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   [関数]{0} に類似しているローカライズされた文字列を検索します。
+        ///   構造体 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CFunction {
+        internal static string Struct {
             get {
-                return ResourceManager.GetString("CFunction", resourceCulture);
+                return ResourceManager.GetString("Struct", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0}{1} に類似しているローカライズされた文字列を検索します。
+        ///   別名 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CType {
+        internal static string Typedef {
             get {
-                return ResourceManager.GetString("CType", resourceCulture);
+                return ResourceManager.GetString("Typedef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   共用体 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Union {
+            get {
+                return ResourceManager.GetString("Union", resourceCulture);
             }
         }
     }
