@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 namespace Magica.Pgdoc.Clang
 {
-    public class CFunction : ICloneable
+    public class CFunction 
     {
+        internal CHeaderFile parent;
+
+        public CHeaderFile Parent { get { return parent; } }
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Definition { get; set; }
@@ -14,13 +17,14 @@ namespace Magica.Pgdoc.Clang
 
         private List<CFunctionParameter> parameters = new List<CFunctionParameter>();
 
-        public object Clone()
+        public CFunction Copy()
         {
-            CFunction def = (CFunction)MemberwiseClone();
+            CFunction obj = (CFunction)MemberwiseClone();
 
-            def.parameters = ListUtil.Clone(def.parameters);
+            obj.parent = null;
+            obj.parameters = ListUtil.Clone(obj.parameters);
 
-            return def;
+            return obj;
         }
     }
 

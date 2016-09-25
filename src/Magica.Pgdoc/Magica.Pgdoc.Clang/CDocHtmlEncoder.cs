@@ -271,7 +271,7 @@ namespace Magica.Pgdoc.Clang
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendFormat("<h1>{0}</h1>", Escape(type.Name));
+            builder.AppendFormat("<h1>{0} {1}</h1>", Escape(type.Name), EncodeTypeKind(type.Kind));
             if (!string.IsNullOrEmpty(type.Summary))
             {
                 builder.AppendFormat("<h2>{0}</h2>", "概要");

@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace Magica.Pgdoc.Clang
 {
-    public class CType : ICloneable
+    public class CType
     {
+        internal CHeaderFile parent;
+
+        public CHeaderFile Parent { get { return parent; } }
         public string Name { get; set; }
         public TypeKind Kind { get; set; }
         public string Summary { get; set; }
@@ -20,13 +23,14 @@ namespace Magica.Pgdoc.Clang
 
         private List<CTypeField> fields = new List<CTypeField>();
 
-        public object Clone()
+        public CType Copy()
         {
-            CType def = (CType)MemberwiseClone();
+            CType obj = (CType)MemberwiseClone();
 
-            def.fields = ListUtil.Clone(def.fields);
+            obj.parent = null;
+            obj.fields = ListUtil.Clone(obj.fields);
 
-            return def;
+            return obj;
         }
     }
 }

@@ -171,7 +171,7 @@ namespace CDocEditor
         {
             CTypeTreeNode view = (CTypeTreeNode)base.Clone();
 
-            view.data = (CType)data.Clone();
+            view.data = data.Copy();
 
             return view;
         }
@@ -213,7 +213,7 @@ namespace CDocEditor
         {
             CFunctionTreeNode view = (CFunctionTreeNode)base.Clone();
 
-            view.data = (CFunction)data.Clone();
+            view.data = data.Copy();
 
             return view;
         }
@@ -255,7 +255,7 @@ namespace CDocEditor
         {
             CConstTreeNode view = (CConstTreeNode)base.Clone();
 
-            view.data = (CConst)data.Clone();
+            view.data = data.Copy();
 
             return view;
         }

@@ -87,10 +87,12 @@ namespace Magica.Pgdoc.Clang.Tests
             Assert.AreEqual(doc.Summary, "c-doc-summary");
             Assert.AreEqual(doc.Description, "c-doc-description");
 
+            Assert.AreSame(doc.HeaderFiles[0].Parent, doc);
             Assert.AreEqual(doc.HeaderFiles[0].Name, "header1");
             Assert.AreEqual(doc.HeaderFiles[0].Summary, "summary1");
             Assert.AreEqual(doc.HeaderFiles[0].Description, "description1");
 
+            Assert.AreSame(doc.HeaderFiles[0].Types[0].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Name, "type1");
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Kind, TypeKind.Struct);
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Summary, "type-summary1");
@@ -109,27 +111,32 @@ namespace Magica.Pgdoc.Clang.Tests
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[2].Type, "type3");
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[2].Description, "aaaaa3");
 
+            Assert.AreSame(doc.HeaderFiles[0].Types[1].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Name, "type2");
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Kind, TypeKind.Union);
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Summary, "type-summary2");
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Definition, "type-definition2");
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Description, "type-description2");
 
+            Assert.AreSame(doc.HeaderFiles[0].Consts[0].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Name, "constants1");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Type, "int");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Summary, "aaa1");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Description, "bbbbb1");
 
+            Assert.AreSame(doc.HeaderFiles[0].Consts[1].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Name, "constants2");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Type, "long");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Summary, "aaa2");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Description, "bbbbb2");
 
+            Assert.AreSame(doc.HeaderFiles[0].Consts[2].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Name, "constants3");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Type, "long long");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Summary, "aaa3");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Description, "bbbbb3");
 
+            Assert.AreSame(doc.HeaderFiles[0].Functions[0].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Name, "func1");
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Summary, "func-summary1");
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Definition, "func-definition1");
@@ -140,6 +147,7 @@ namespace Magica.Pgdoc.Clang.Tests
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Return, "func-return1");
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Description, "func-description1");
 
+            Assert.AreSame(doc.HeaderFiles[1].Parent, doc);
             Assert.AreEqual(doc.HeaderFiles[1].Name, "header2");
             Assert.AreEqual(doc.HeaderFiles[1].Summary, "summary2");
             Assert.AreEqual(doc.HeaderFiles[1].Description, "description2");
@@ -243,10 +251,12 @@ namespace Magica.Pgdoc.Clang.Tests
             Assert.AreEqual(doc.Summary, "c-doc-summary");
             Assert.AreEqual(doc.Description, "c-doc-description");
 
+            Assert.AreSame(doc.HeaderFiles[0].Parent, doc);
             Assert.AreEqual(doc.HeaderFiles[0].Name, "header1");
             Assert.AreEqual(doc.HeaderFiles[0].Summary, "summary1");
             Assert.AreEqual(doc.HeaderFiles[0].Description, "description1");
 
+            Assert.AreSame(doc.HeaderFiles[0].Types[0].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Name, "type1");
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Kind, TypeKind.Struct);
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Summary, "type-summary1");
@@ -265,27 +275,32 @@ namespace Magica.Pgdoc.Clang.Tests
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[2].Type, "type3");
             Assert.AreEqual(doc.HeaderFiles[0].Types[0].Fields[2].Description, "aaaaa3");
 
+            Assert.AreSame(doc.HeaderFiles[0].Types[1].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Name, "type2");
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Kind, TypeKind.Union);
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Summary, "type-summary2");
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Definition, "type-definition2");
             Assert.AreEqual(doc.HeaderFiles[0].Types[1].Description, "type-description2");
 
+            Assert.AreSame(doc.HeaderFiles[0].Consts[0].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Name, "constants1");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Type, "int");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Summary, "aaa1");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[0].Description, "bbbbb1");
 
+            Assert.AreSame(doc.HeaderFiles[0].Consts[1].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Name, "constants2");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Type, "long");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Summary, "aaa2");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[1].Description, "bbbbb2");
 
+            Assert.AreSame(doc.HeaderFiles[0].Consts[2].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Name, "constants3");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Type, "long long");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Summary, "aaa3");
             Assert.AreEqual(doc.HeaderFiles[0].Consts[2].Description, "bbbbb3");
 
+            Assert.AreSame(doc.HeaderFiles[0].Functions[0].Parent, doc.HeaderFiles[0]);
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Name, "func1");
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Summary, "func-summary1");
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Definition, "func-definition1");
@@ -296,6 +311,7 @@ namespace Magica.Pgdoc.Clang.Tests
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Return, "func-return1");
             Assert.AreEqual(doc.HeaderFiles[0].Functions[0].Description, "func-description1");
 
+            Assert.AreSame(doc.HeaderFiles[1].Parent, doc);
             Assert.AreEqual(doc.HeaderFiles[1].Name, "header2");
             Assert.AreEqual(doc.HeaderFiles[1].Summary, "summary2");
             Assert.AreEqual(doc.HeaderFiles[1].Description, "description2");
@@ -313,6 +329,142 @@ namespace Magica.Pgdoc.Clang.Tests
             Assert.AreEqual(doc.HeaderFiles[2].Name, "header3");
             Assert.AreEqual(doc.HeaderFiles[2].Summary, "summary3");
             Assert.AreEqual(doc.HeaderFiles[2].Description, "description3");
+        }
+
+        [TestMethod()]
+        public void HeaderFileAttachTest()
+        {
+            CDocument doc = new CDocument();
+            CHeaderFile h1 = new CHeaderFile();
+            CHeaderFile h2 = new CHeaderFile();
+
+            doc.HeaderFiles.Add(h1);
+
+            Assert.AreSame(h1.Parent, doc);
+            Assert.IsNull(h2.Parent);
+
+            doc.HeaderFiles.Add(h2);
+
+            Assert.AreSame(h1.Parent, doc);
+            Assert.AreSame(h2.Parent, doc);
+
+            doc.HeaderFiles.RemoveAt(0);
+
+            Assert.IsNull(h1.Parent);
+            Assert.AreSame(h2.Parent, doc);
+            
+            doc.HeaderFiles[0] = h1;
+
+            Assert.AreSame(h1.Parent, doc);
+            Assert.IsNull(h2.Parent);
+
+            CDocument doc2 = doc.Copy();
+            Assert.AreEqual(doc2.HeaderFiles.Count, 0);
+
+            doc2.HeaderFiles.Add(h2);
+            Assert.AreSame(h2.Parent, doc2);
+        }
+
+        [TestMethod()]
+        public void TypesFileAttachTest()
+        {
+            CHeaderFile h = new CHeaderFile();
+            CType t1 = new CType();
+            CType t2 = new CType();
+
+            h.Types.Add(t1);
+
+            Assert.AreSame(t1.Parent, h);
+            Assert.IsNull(t2.Parent);
+
+            h.Types.Add(t2);
+
+            Assert.AreSame(t1.Parent, h);
+            Assert.AreSame(t2.Parent, h);
+
+            h.Types.RemoveAt(0);
+
+            Assert.IsNull(t1.Parent);
+            Assert.AreSame(t2.Parent, h);
+
+            h.Types[0] = t1;
+
+            Assert.AreSame(t1.Parent, h);
+            Assert.IsNull(t2.Parent);
+
+            CHeaderFile h2 = h.Copy();
+            Assert.AreEqual(h2.Types.Count, 0);
+
+            h2.Types.Add(t2);
+            Assert.AreSame(t2.Parent, h2);
+        }
+
+        [TestMethod()]
+        public void FunctionsFileAttachTest()
+        {
+            CHeaderFile h = new CHeaderFile();
+            CFunction f1 = new CFunction();
+            CFunction f2 = new CFunction();
+
+            h.Functions.Add(f1);
+
+            Assert.AreSame(f1.Parent, h);
+            Assert.IsNull(f2.Parent);
+
+            h.Functions.Add(f2);
+
+            Assert.AreSame(f1.Parent, h);
+            Assert.AreSame(f2.Parent, h);
+
+            h.Functions.RemoveAt(0);
+
+            Assert.IsNull(f1.Parent);
+            Assert.AreSame(f2.Parent, h);
+
+            h.Functions[0] = f1;
+
+            Assert.AreSame(f1.Parent, h);
+            Assert.IsNull(f2.Parent);
+
+            CHeaderFile h2 = h.Copy();
+            Assert.AreEqual(h2.Functions.Count, 0);
+
+            h2.Functions.Add(f2);
+            Assert.AreSame(f2.Parent, h2);
+        }
+
+        [TestMethod()]
+        public void ConstsFileAttachTest()
+        {
+            CHeaderFile h = new CHeaderFile();
+            CConst c1 = new CConst();
+            CConst c2 = new CConst();
+
+            h.Consts.Add(c1);
+
+            Assert.AreSame(c1.Parent, h);
+            Assert.IsNull(c2.Parent);
+
+            h.Consts.Add(c2);
+
+            Assert.AreSame(c1.Parent, h);
+            Assert.AreSame(c2.Parent, h);
+
+            h.Consts.RemoveAt(0);
+
+            Assert.IsNull(c1.Parent);
+            Assert.AreSame(c2.Parent, h);
+
+            h.Consts[0] = c1;
+
+            Assert.AreSame(c1.Parent, h);
+            Assert.IsNull(c2.Parent);
+
+            CHeaderFile h2 = h.Copy();
+            Assert.AreEqual(h2.Consts.Count, 0);
+
+            h2.Consts.Add(c2);
+            Assert.AreSame(c2.Parent, h2);
         }
     }
 }

@@ -59,6 +59,7 @@
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Magica.Pgdoc.Clang\TypeKind.cs" />
+    <Compile Include="Magica.Pgdoc\AttachableCollection.cs" />
     <Compile Include="Magica.Pgdoc\ListUtil.cs" />
     <Compile Include="Magica.Pgdoc\PgdocException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

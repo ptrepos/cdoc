@@ -9,16 +9,23 @@ using System.Threading.Tasks;
 
 namespace Magica.Pgdoc.Clang
 {
-    public class CConst : ICloneable
+    public class CConst
     {
+        internal CHeaderFile parent;
+
+        public CHeaderFile Parent { get { return parent; } }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
 
-        public object Clone()
+        public CConst Copy()
         {
-            return MemberwiseClone();
+            CConst obj = (CConst)MemberwiseClone();
+
+            obj.parent = null;
+
+            return obj;
         }
     }
 }

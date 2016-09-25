@@ -9,19 +9,33 @@ using System.Threading.Tasks;
 
 namespace Magica.Pgdoc.Clang
 {
-    public class CDocument : ICloneable
+    public class CDocument
     {
         public const string FileExtension = ".pgdoc";
 
-        private List<CHeaderFile> headerFiles = new List<CHeaderFile>();
+        private CHeaderFileCollection headerFiles;
 
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
 
-        public List<CHeaderFile> HeaderFiles
+        public CDocument()
+        {
+            this.headerFiles = new CHeaderFileCollection(this);
+        }
+
+        public CHeaderFileCollection HeaderFiles
         {
             get { return headerFiles; }
+        }
+
+        public CDocument Copy()
+        {
+            CDocument obj = (CDocument)MemberwiseClone();
+
+            obj.headerFiles = new CHeaderFileCollection(obj);
+
+            return obj;
         }
 
         public static CDocument Load(string filename)
@@ -52,13 +66,24 @@ namespace Magica.Pgdoc.Clang
             docWriter.Write(writer, this);
         }
 
-        public object Clone()
+        public class CHeaderFileCollection : AttachableCollection<CHeaderFile>
         {
-            CDocument def = (CDocument)MemberwiseClone();
+            CDocument doc;
 
-            def.headerFiles = ListUtil.Clone(def.headerFiles);
+            internal CHeaderFileCollection(CDocument doc)
+            {
+                this.doc = doc;
+            }
 
-            return def;
+            protected override void Attach(CHeaderFile item)
+            {
+                item.parent = doc;
+            }
+
+            protected override void Dettach(CHeaderFile item)
+            {
+                item.parent = null;
+            }
         }
     }
 }

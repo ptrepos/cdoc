@@ -1,45 +1,117 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Magica.Pgdoc.Clang
 {
-    public class CHeaderFile : ICloneable
+    public class CHeaderFile
     {
-        private List<CType> types = new List<CType>();
-        private List<CFunction> functions = new List<CFunction>();
-        private List<CConst> consts = new List<CConst>();
+        internal CDocument parent;
+
+        private CTypeCollection types;
+        private CFunctionCollection functions;
+        private CConstCollection consts;
+
+        public CHeaderFile()
+        {
+            types = new CTypeCollection(this);
+            functions = new CFunctionCollection(this);
+            consts = new CConstCollection(this);
+        }
+
+        public CDocument Parent { get { return parent; } }
 
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
 
-        public List<CType> Types
+        public CTypeCollection Types
         {
-            get { return types; }
+            get { return this.types; }
         }
 
-        public List<CFunction> Functions
+        public Collection<CFunction> Functions
         {
-            get { return functions; }
+            get { return this.functions; }
         }
 
-        public List<CConst> Consts
+        public Collection<CConst> Consts
         {
-            get { return consts; }
+            get { return this.consts; }
         }
 
-        public object Clone()
+        public CHeaderFile Copy()
         {
-            CHeaderFile def = (CHeaderFile)MemberwiseClone();
+            CHeaderFile obj = (CHeaderFile)MemberwiseClone();
 
-            def.types = ListUtil.Clone(def.types);
-            def.functions = ListUtil.Clone(def.functions);
-            def.consts = ListUtil.Clone(def.consts);
+            obj.parent = null;
+            obj.types = new CTypeCollection(obj);
+            obj.functions = new CFunctionCollection(obj);
+            obj.consts = new CConstCollection(obj);
 
-            return def;
+            return obj;
+        }
+
+        public class CTypeCollection : AttachableCollection<CType>
+        {
+            CHeaderFile headerFile;
+
+            internal CTypeCollection(CHeaderFile headerFile)
+            {
+                this.headerFile = headerFile;
+            }
+
+            protected override void Attach(CType item)
+            {
+                item.parent = headerFile;
+            }
+
+            protected override void Dettach(CType item)
+            {
+                item.parent = null;
+            }
+        }
+
+        public class CFunctionCollection : AttachableCollection<CFunction>
+        {
+            CHeaderFile headerFile;
+
+            internal CFunctionCollection(CHeaderFile headerFile)
+            {
+                this.headerFile = headerFile;
+            }
+
+            protected override void Attach(CFunction item)
+            {
+                item.parent = headerFile;
+            }
+
+            protected override void Dettach(CFunction item)
+            {
+                item.parent = null;
+            }
+        }
+
+        public class CConstCollection : AttachableCollection<CConst>
+        {
+            CHeaderFile headerFile;
+
+            internal CConstCollection(CHeaderFile headerFile)
+            {
+                this.headerFile = headerFile;
+            }
+
+            protected override void Attach(CConst item)
+            {
+                item.parent = headerFile;
+            }
+
+            protected override void Dettach(CConst item)
+            {
+                item.parent = null;
+            }
         }
     }
 }
