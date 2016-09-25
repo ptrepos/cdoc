@@ -515,16 +515,22 @@ namespace CDocEditor
                             if (target is CDocTreeNode)
                             {
                                 target.Nodes.Add((TreeNode)node.Clone());
-                                return;
                             }
                             else
                             {
                                 if (target.Parent == parent)
                                 {
                                     target.Parent.Nodes.Insert(target.Index, (TreeNode)node.Clone());
-                                    return;
+                                }
+                                else
+                                {
+                                    e.Effect = DragDropEffects.None;
                                 }
                             }
+                        }
+                        else
+                        {
+                            e.Effect = DragDropEffects.None;
                         }
                     }
                     else
@@ -542,7 +548,10 @@ namespace CDocEditor
                                 if (groupNode2.Type == parent.Type)
                                 {
                                     groupNode2.Nodes.Add((TreeNode)node.Clone());
-                                    return;
+                                }
+                                else
+                                {
+                                    e.Effect = DragDropEffects.None;
                                 }
                             }
                             else
@@ -551,14 +560,20 @@ namespace CDocEditor
                                 if (groupNode2.Type == parent.Type)
                                 {
                                     groupNode2.Nodes.Insert(target.Index, (TreeNode)node.Clone());
-                                    return;
+                                }
+                                else
+                                {
+                                    e.Effect = DragDropEffects.None;
                                 }
                             }
+                        }
+                        else
+                        {
+                            e.Effect = DragDropEffects.None;
                         }
                     }
                 }
             }
-            e.Effect = DragDropEffects.None;
         }
 
         private void pgTree_ItemDrag(object sender, ItemDragEventArgs e)
