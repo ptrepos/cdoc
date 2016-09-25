@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Magica.Pgdoc.Clang\CDocHtmlEncoder.cs" />
+    <Compile Include="Magica.Pgdoc.Clang\CDocHtmlGenerator.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CDocWriter.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CDocReader.cs" />
     <Compile Include="Magica.Pgdoc.Clang\CDocument.cs" />
