@@ -7,7 +7,7 @@ using Mdoc;
 
 namespace Magica.Pgdoc.Clang
 {
-    public class CDocHtmlEncoder
+    public class CDocHtmlGenerator
     {
         private const string CSS_DIR = "style";
 
@@ -21,39 +21,54 @@ namespace Magica.Pgdoc.Clang
                 Path.Combine(Path.GetDirectoryName(location), CSS_DIR),
                 Path.Combine(path, CSS_DIR));
 
-            using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(doc)), false, Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(
+                        Path.Combine(path, GetPath(doc)), 
+                        false, 
+                        Encoding.UTF8))
             {
-                EncodePage(writer, Escape(doc.Name), EncodeMenu(doc), EncodeBody(doc));
+                GeneratePage(writer, Escape(doc.Name), GenerateMenu(doc), GenerateBody(doc));
             }
 
             foreach (CHeaderFile headerFile in doc.HeaderFiles)
             {
-                using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(headerFile)), false, Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(
+                        Path.Combine(path, GetPath(headerFile)), 
+                        false, 
+                        Encoding.UTF8))
                 {
-                    EncodePage(writer, Escape(doc.Name), EncodeMenu(headerFile), EncodeBody(headerFile));
+                    GeneratePage(writer, Escape(doc.Name), GenerateMenu(headerFile), GenerateBody(headerFile));
                 }
 
                 foreach (CType type in headerFile.Types)
                 {
-                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(type)), false, Encoding.UTF8))
+                    using (StreamWriter writer = new StreamWriter(
+                            Path.Combine(path, GetPath(type)), 
+                            false, 
+                            Encoding.UTF8))
                     {
-                        EncodePage(writer, Escape(doc.Name), EncodeMenu(headerFile), EncodeBody(type));
+                        GeneratePage(writer, Escape(doc.Name), GenerateMenu(headerFile), GenerateBody(type));
                     }
                 }
 
                 foreach (CConst _const in headerFile.Consts)
                 {
-                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(_const)), false, Encoding.UTF8))
+                    using (StreamWriter writer = new StreamWriter(
+                            Path.Combine(path, GetPath(_const)), 
+                            false, 
+                            Encoding.UTF8))
                     {
-                        EncodePage(writer, Escape(doc.Name), EncodeMenu(headerFile), EncodeBody(_const));
+                        GeneratePage(writer, Escape(doc.Name), GenerateMenu(headerFile), GenerateBody(_const));
                     }
                 }
 
                 foreach (CFunction func in headerFile.Functions)
                 {
-                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(func)), false, Encoding.UTF8))
+                    using (StreamWriter writer = new StreamWriter(
+                            Path.Combine(path, GetPath(func)), 
+                            false, 
+                            Encoding.UTF8))
                     {
-                        EncodePage(writer, Escape(doc.Name), EncodeMenu(headerFile), EncodeBody(func));
+                        GeneratePage(writer, Escape(doc.Name), GenerateMenu(headerFile), GenerateBody(func));
                     }
                 }
             }
@@ -68,7 +83,7 @@ namespace Magica.Pgdoc.Clang
             }
         }
 
-        private void EncodePage(TextWriter writer, string title, string menu, string body)
+        private void GeneratePage(TextWriter writer, string title, string menu, string body)
         {
             writer.WriteLine(@"<!DOC HTML>
 <html>
@@ -85,7 +100,7 @@ namespace Magica.Pgdoc.Clang
 </html>", title, menu, body);
         }
 
-        private string EncodeMenu(CDocument doc)
+        private string GenerateMenu(CDocument doc)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -100,10 +115,11 @@ namespace Magica.Pgdoc.Clang
             }
             builder.AppendLine("</ul>");
             builder.AppendLine("</li></ul>");
-            return builder.ToString(); ;
+
+            return builder.ToString();
         }
 
-        private string EncodeMenu(CHeaderFile headerFile)
+        private string GenerateMenu(CHeaderFile headerFile)
         {
             CDocument doc = headerFile.Parent;
 
@@ -159,62 +175,10 @@ namespace Magica.Pgdoc.Clang
             }
             builder.AppendLine("</ul>");
             builder.AppendLine("</li></ul>");
-            return builder.ToString(); ;
+            return builder.ToString();
         }
 
-        private string EncodeMenu(CType type1)
-        {
-            CDocument doc = type1.Parent.Parent;
-
-            StringBuilder builder = new StringBuilder();
-
-            builder.AppendFormat("<h2>{0}</h2>", "ドキュメント");
-            builder.AppendLine("<ul>");
-            builder.AppendFormat("<li><a href=\"{1}\">{0}</a>", Escape(doc.Name), GetPath(doc));
-            builder.AppendLine("<ul>");
-            foreach (CHeaderFile headerFile2 in doc.HeaderFiles)
-            {
-                builder.AppendFormat("<li><a href=\"{1}\">{0}</a>", Escape(headerFile2.Name), GetPath(headerFile2));
-                builder.AppendLine("<ul>");
-                if (headerFile2.Types.Count > 0)
-                {
-                    builder.AppendLine("<li>型</li>");
-                    builder.AppendLine("<ul>");
-                    foreach (CType type in headerFile2.Types)
-                    {
-                        builder.AppendFormat("<li><a href=\"{1}\">{0}</a>", Escape(type.Name), GetPath(type));
-                    }
-                    builder.AppendLine("</ul>");
-                }
-                if (headerFile2.Consts.Count > 0)
-                {
-                    builder.AppendLine("<li>定数</li>");
-                    builder.AppendLine("<ul>");
-                    foreach (CConst _const in headerFile2.Consts)
-                    {
-                        builder.AppendFormat("<li><a href=\"{1}\">{0}</a>", Escape(_const.Name), GetPath(_const));
-                    }
-                    builder.AppendLine("</ul>");
-                }
-                if (headerFile2.Functions.Count > 0)
-                {
-                    builder.AppendLine("<li>関数</li>");
-                    builder.AppendLine("<ul>");
-                    foreach (CFunction function in headerFile2.Functions)
-                    {
-                        builder.AppendFormat("<li><a href=\"{1}\">{0}</a>", Escape(function.Name), GetPath(function));
-                    }
-                    builder.AppendLine("</ul>");
-                }
-                builder.AppendLine("</ul>");
-                builder.Append("</li>");
-            }
-            builder.AppendLine("</ul>");
-            builder.AppendLine("</li></ul>");
-            return builder.ToString(); ;
-        }
-
-        private string EncodeBody(CDocument doc)
+        private string GenerateBody(CDocument doc)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -254,7 +218,7 @@ namespace Magica.Pgdoc.Clang
             return builder.ToString();
         }
 
-        private string EncodeBody(CHeaderFile headerFile)
+        private string GenerateBody(CHeaderFile headerFile)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -346,7 +310,7 @@ namespace Magica.Pgdoc.Clang
             return builder.ToString();
         }
 
-        private string EncodeBody(CType type)
+        private string GenerateBody(CType type)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -383,7 +347,7 @@ namespace Magica.Pgdoc.Clang
             return builder.ToString();
         }
 
-        private string EncodeBody(CFunction function)
+        private string GenerateBody(CFunction function)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -426,7 +390,7 @@ namespace Magica.Pgdoc.Clang
             return builder.ToString();
         }
 
-        private string EncodeBody(CConst _const)
+        private string GenerateBody(CConst _const)
         {
             StringBuilder builder = new StringBuilder();
 

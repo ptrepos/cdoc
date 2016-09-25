@@ -102,7 +102,7 @@ namespace CDocEditor
 
                 CDocument doc = GetData();
 
-                CDocHtmlEncoder docEncoder = new CDocHtmlEncoder();
+                CDocHtmlGenerator docEncoder = new CDocHtmlGenerator();
 
                 string path = Path.Combine(
                         dialog.SelectedPath, 
