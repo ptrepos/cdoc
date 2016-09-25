@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -8,25 +9,33 @@ namespace Magica.Pgdoc.Clang
 {
     public class CDocHtmlEncoder
     {
+        private const string CSS_DIR = "style";
+
         public void Encode(string path, CDocument doc)
         {
-            Directory.CreateDirectory(Path.Combine(path, "doc"));
+            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(Path.Combine(path, CSS_DIR));
 
-            using (StreamWriter writer = new StreamWriter(Path.Combine(path, "doc", GetPath(doc)), false, Encoding.UTF8))
+            string location = Assembly.GetEntryAssembly().Location;
+            CopyCss(
+                Path.Combine(Path.GetDirectoryName(location), CSS_DIR),
+                Path.Combine(path, CSS_DIR));
+
+            using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(doc)), false, Encoding.UTF8))
             {
                 EncodePage(writer, Escape(doc.Name), EncodeMenu(doc), EncodeBody(doc));
             }
 
             foreach (CHeaderFile headerFile in doc.HeaderFiles)
             {
-                using (StreamWriter writer = new StreamWriter(Path.Combine(path, "doc", GetPath(headerFile)), false, Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(headerFile)), false, Encoding.UTF8))
                 {
                     EncodePage(writer, Escape(doc.Name), EncodeMenu(doc), EncodeBody(headerFile));
                 }
 
                 foreach (CType type in headerFile.Types)
                 {
-                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, "doc", GetPath(type)), false, Encoding.UTF8))
+                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(type)), false, Encoding.UTF8))
                     {
                         EncodePage(writer, Escape(doc.Name), EncodeMenu(doc), EncodeBody(type));
                     }
@@ -34,7 +43,7 @@ namespace Magica.Pgdoc.Clang
 
                 foreach (CConst _const in headerFile.Consts)
                 {
-                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, "doc", GetPath(_const)), false, Encoding.UTF8))
+                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(_const)), false, Encoding.UTF8))
                     {
                         EncodePage(writer, Escape(doc.Name), EncodeMenu(doc), EncodeBody(_const));
                     }
@@ -42,11 +51,20 @@ namespace Magica.Pgdoc.Clang
 
                 foreach (CFunction func in headerFile.Functions)
                 {
-                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, "doc", GetPath(func)), false, Encoding.UTF8))
+                    using (StreamWriter writer = new StreamWriter(Path.Combine(path, GetPath(func)), false, Encoding.UTF8))
                     {
                         EncodePage(writer, Escape(doc.Name), EncodeMenu(doc), EncodeBody(func));
                     }
                 }
+            }
+        }
+
+        private void CopyCss(string sourcePath, string destPath)
+        {
+            string[] files = Directory.GetFiles(sourcePath);
+            foreach (string file in files)
+            {
+                File.Copy(file, Path.Combine(destPath, Path.GetFileName(file)), true);
             }
         }
 

@@ -71,9 +71,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="style\doc.css" />
-    <Content Include="style\hyphen.png" />
-    <Content Include="style\plus.png" />
+    <Content Include="style\doc.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="style\hyphen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="style\plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -102,7 +103,11 @@ namespace CDocEditor
                 CDocument doc = GetData();
 
                 CDocHtmlEncoder docEncoder = new CDocHtmlEncoder();
-                docEncoder.Encode(dialog.SelectedPath, doc);
+
+                string path = Path.Combine(
+                        dialog.SelectedPath, 
+                        Path.GetFileNameWithoutExtension(filename));
+                docEncoder.Encode(path, doc);
             }
             catch (Exception ex)
             {
