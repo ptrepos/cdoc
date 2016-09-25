@@ -457,6 +457,9 @@ namespace CDocEditor
         {
             object o;
 
+            o = obj.GetData(typeof(CHeaderFileTreeNode));
+            if (o != null)
+                return (TreeNode)o;
             o = obj.GetData(typeof(CTypeTreeNode));
             if (o != null)
                 return (TreeNode)o;
@@ -500,28 +503,56 @@ namespace CDocEditor
                 if (e.Effect == DragDropEffects.Move ||
                     e.Effect == DragDropEffects.Copy)
                 {
-                    GroupTreeNode parent = (GroupTreeNode)node.Parent;
-
-                    TreeNode target = pgTree.GetNodeAt(pgTree.PointToClient(new Point(e.X, e.Y)));
-
-                    if (target != node)
+                    if (node is CHeaderFileTreeNode)
                     {
-                        if (target is GroupTreeNode)
+                        // ヘッダノードの場合
+                        CDocTreeNode parent = (CDocTreeNode)node.Parent;
+
+                        TreeNode target = pgTree.GetNodeAt(pgTree.PointToClient(new Point(e.X, e.Y)));
+
+                        if (target != node)
                         {
-                            GroupTreeNode groupNode2 = (GroupTreeNode)target;
-                            if (groupNode2.Type == parent.Type)
+                            if (target is CDocTreeNode)
                             {
-                                groupNode2.Nodes.Add((TreeNode)node.Clone());
+                                target.Nodes.Add((TreeNode)node.Clone());
                                 return;
                             }
-                        }
-                        else
-                        {
-                            GroupTreeNode groupNode2 = (GroupTreeNode)target.Parent;
-                            if (groupNode2.Type == parent.Type)
+                            else
                             {
-                                groupNode2.Nodes.Insert(target.Index, (TreeNode)node.Clone());
-                                return;
+                                if (target.Parent == parent)
+                                {
+                                    target.Parent.Nodes.Insert(target.Index, (TreeNode)node.Clone());
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // 型、定数、関数ノードの場合
+                        GroupTreeNode parent = (GroupTreeNode)node.Parent;
+
+                        TreeNode target = pgTree.GetNodeAt(pgTree.PointToClient(new Point(e.X, e.Y)));
+
+                        if (target != node)
+                        {
+                            if (target is GroupTreeNode)
+                            {
+                                GroupTreeNode groupNode2 = (GroupTreeNode)target;
+                                if (groupNode2.Type == parent.Type)
+                                {
+                                    groupNode2.Nodes.Add((TreeNode)node.Clone());
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                GroupTreeNode groupNode2 = (GroupTreeNode)target.Parent;
+                                if (groupNode2.Type == parent.Type)
+                                {
+                                    groupNode2.Nodes.Insert(target.Index, (TreeNode)node.Clone());
+                                    return;
+                                }
                             }
                         }
                     }

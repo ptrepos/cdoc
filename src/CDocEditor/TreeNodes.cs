@@ -99,7 +99,11 @@ namespace CDocEditor
 
         public override object Clone()
         {
-            throw new NotSupportedException();
+            CHeaderFileTreeNode node = (CHeaderFileTreeNode)base.Clone();
+
+            node.data = this.data.Copy();
+
+            return node;
         }
     }
 
@@ -131,7 +135,11 @@ namespace CDocEditor
 
         public override object Clone()
         {
-            throw new NotSupportedException();
+            GroupTreeNode node = (GroupTreeNode)base.Clone();
+
+            node.Type = this.Type;
+
+            return node;
         }
     }
 
