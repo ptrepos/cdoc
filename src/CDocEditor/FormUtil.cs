@@ -9,7 +9,7 @@ namespace CDocEditor
     {
         public static void ShowException(Form owner, Exception ex)
         {
-            MessageBox.Show(owner, ex.GetType().Name, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(owner, ex.Message, ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public static void AutoTabIndex(Form form)

@@ -467,6 +467,9 @@ namespace Magica.Pgdoc.Clang
 
         private string EncodeMdoc(string text)
         {
+            if (string.IsNullOrEmpty(text)) { 
+                return "";
+            }
             StringReader reader = new StringReader(text);
             StringWriter writer = new StringWriter();
             StringWriter messageWriter = new StringWriter();
