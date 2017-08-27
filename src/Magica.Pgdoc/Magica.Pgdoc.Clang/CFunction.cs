@@ -28,9 +28,17 @@ namespace Magica.Pgdoc.Clang
         }
     }
 
+    public enum IoType
+    {
+        In,
+        Out,
+        InOut
+    }
+
     public class CFunctionParameter : ICloneable
     {
         public string Name { get; set; }
+        public IoType IoType { get; set; }
         public string Description { get; set; }
 
         public object Clone()

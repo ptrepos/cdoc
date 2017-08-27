@@ -123,6 +123,15 @@
   <data name="Function" xml:space="preserve">
     <value>関数</value>
   </data>
+  <data name="IoType_In" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="IoType_InOut" xml:space="preserve">
+    <value>InOut</value>
+  </data>
+  <data name="IoType_Out" xml:space="preserve">
+    <value>Out</value>
+  </data>
   <data name="Library" xml:space="preserve">
     <value>ライブラリ</value>
   </data>

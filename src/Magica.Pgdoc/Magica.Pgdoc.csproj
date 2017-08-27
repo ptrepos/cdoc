@@ -73,7 +73,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="style\doc.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="style\hyphen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

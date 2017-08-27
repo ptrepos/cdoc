@@ -136,6 +136,7 @@ namespace Magica.Pgdoc.Clang
             XmlElement elem = xmlDoc.CreateElement("parameter");
 
             SetAttribute(elem, "name", function.Name);
+            SetAttribute(elem, "io", ConvertIoType(function.IoType));
 
             SetElement(elem, "description", function.Description);
 
@@ -154,6 +155,20 @@ namespace Magica.Pgdoc.Clang
                     return "union";
                 case TypeKind.Typedef:
                     return "typedef";
+            }
+            return null;
+        }
+
+        public string ConvertIoType(IoType type)
+        {
+            switch (type)
+            {
+                case IoType.In:
+                    return "in";
+                case IoType.Out:
+                    return "out";
+                case IoType.InOut:
+                    return "inout";
             }
             return null;
         }

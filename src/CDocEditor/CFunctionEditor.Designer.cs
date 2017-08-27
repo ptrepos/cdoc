@@ -42,15 +42,15 @@
             this.summaryBox = new System.Windows.Forms.TextBox();
             this.summaryLabel = new System.Windows.Forms.Label();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IoTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.parameterGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // remarksLabel
             // 
-            this.remarksLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.remarksLabel.AutoSize = true;
-            this.remarksLabel.Location = new System.Drawing.Point(25, 327);
+            this.remarksLabel.Location = new System.Drawing.Point(25, 533);
             this.remarksLabel.Name = "remarksLabel";
             this.remarksLabel.Size = new System.Drawing.Size(29, 12);
             this.remarksLabel.TabIndex = 23;
@@ -60,31 +60,31 @@
             // 
             this.remarksBox.AcceptsReturn = true;
             this.remarksBox.AcceptsTab = true;
-            this.remarksBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.remarksBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.remarksBox.Location = new System.Drawing.Point(68, 324);
+            this.remarksBox.Location = new System.Drawing.Point(68, 530);
             this.remarksBox.Multiline = true;
             this.remarksBox.Name = "remarksBox";
-            this.remarksBox.Size = new System.Drawing.Size(469, 99);
+            this.remarksBox.Size = new System.Drawing.Size(601, 99);
             this.remarksBox.TabIndex = 22;
             // 
             // returnBox
             // 
             this.returnBox.AcceptsReturn = true;
             this.returnBox.AcceptsTab = true;
-            this.returnBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.returnBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.returnBox.Location = new System.Drawing.Point(68, 275);
+            this.returnBox.Location = new System.Drawing.Point(68, 481);
             this.returnBox.Multiline = true;
             this.returnBox.Name = "returnBox";
-            this.returnBox.Size = new System.Drawing.Size(469, 43);
+            this.returnBox.Size = new System.Drawing.Size(601, 43);
             this.returnBox.TabIndex = 21;
             // 
             // returnLabel
             // 
-            this.returnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.returnLabel.AutoSize = true;
-            this.returnLabel.Location = new System.Drawing.Point(25, 278);
+            this.returnLabel.Location = new System.Drawing.Point(25, 484);
             this.returnLabel.Name = "returnLabel";
             this.returnLabel.Size = new System.Drawing.Size(37, 12);
             this.returnLabel.TabIndex = 20;
@@ -119,13 +119,13 @@
             // 
             // parameterGrid
             // 
-            this.parameterGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.parameterGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.parameterGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.parameterGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.parameterGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameColumn,
+            this.IoTypeColumn,
             this.descriptionColumn});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -138,7 +138,7 @@
             this.parameterGrid.Location = new System.Drawing.Point(68, 181);
             this.parameterGrid.Name = "parameterGrid";
             this.parameterGrid.RowTemplate.Height = 21;
-            this.parameterGrid.Size = new System.Drawing.Size(469, 88);
+            this.parameterGrid.Size = new System.Drawing.Size(601, 294);
             this.parameterGrid.TabIndex = 16;
             // 
             // definitionBox
@@ -150,7 +150,7 @@
             this.definitionBox.Location = new System.Drawing.Point(68, 82);
             this.definitionBox.Multiline = true;
             this.definitionBox.Name = "definitionBox";
-            this.definitionBox.Size = new System.Drawing.Size(469, 93);
+            this.definitionBox.Size = new System.Drawing.Size(601, 93);
             this.definitionBox.TabIndex = 15;
             // 
             // definitionLabel
@@ -171,7 +171,7 @@
             this.summaryBox.Location = new System.Drawing.Point(68, 33);
             this.summaryBox.Multiline = true;
             this.summaryBox.Name = "summaryBox";
-            this.summaryBox.Size = new System.Drawing.Size(469, 43);
+            this.summaryBox.Size = new System.Drawing.Size(601, 43);
             this.summaryBox.TabIndex = 13;
             // 
             // summaryLabel
@@ -190,6 +190,12 @@
             this.nameColumn.HeaderText = "パラメータ名";
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.Width = 120;
+            // 
+            // IoTypeColumn
+            // 
+            this.IoTypeColumn.DataPropertyName = "IoType";
+            this.IoTypeColumn.HeaderText = "I/O";
+            this.IoTypeColumn.Name = "IoTypeColumn";
             // 
             // descriptionColumn
             // 
@@ -216,7 +222,7 @@
             this.Controls.Add(this.summaryBox);
             this.Controls.Add(this.summaryLabel);
             this.Name = "CFunctionEditor";
-            this.Size = new System.Drawing.Size(553, 426);
+            this.Size = new System.Drawing.Size(685, 632);
             ((System.ComponentModel.ISupportInitialize)(this.parameterGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -238,6 +244,7 @@
         private System.Windows.Forms.TextBox summaryBox;
         private System.Windows.Forms.Label summaryLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn IoTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
     }
 }

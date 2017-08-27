@@ -54,7 +54,7 @@
             this.typeBox.FormattingEnabled = true;
             this.typeBox.Location = new System.Drawing.Point(414, 0);
             this.typeBox.Name = "typeBox";
-            this.typeBox.Size = new System.Drawing.Size(182, 20);
+            this.typeBox.Size = new System.Drawing.Size(195, 20);
             this.typeBox.TabIndex = 39;
             // 
             // label1
@@ -70,10 +70,10 @@
             // 
             // remarksLabel
             // 
-            this.remarksLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.remarksLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.remarksLabel.AutoSize = true;
-            this.remarksLabel.Location = new System.Drawing.Point(64, 284);
+            this.remarksLabel.Location = new System.Drawing.Point(64, 521);
             this.remarksLabel.Name = "remarksLabel";
             this.remarksLabel.Size = new System.Drawing.Size(29, 12);
             this.remarksLabel.TabIndex = 35;
@@ -83,12 +83,13 @@
             // 
             this.remarksBox.AcceptsReturn = true;
             this.remarksBox.AcceptsTab = true;
-            this.remarksBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.remarksBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.remarksBox.Location = new System.Drawing.Point(99, 281);
+            this.remarksBox.Location = new System.Drawing.Point(99, 518);
             this.remarksBox.Multiline = true;
             this.remarksBox.Name = "remarksBox";
-            this.remarksBox.Size = new System.Drawing.Size(497, 128);
+            this.remarksBox.Size = new System.Drawing.Size(510, 128);
             this.remarksBox.TabIndex = 34;
             // 
             // nameBox
@@ -118,7 +119,7 @@
             this.definitionBox.Location = new System.Drawing.Point(99, 74);
             this.definitionBox.Multiline = true;
             this.definitionBox.Name = "definitionBox";
-            this.definitionBox.Size = new System.Drawing.Size(497, 93);
+            this.definitionBox.Size = new System.Drawing.Size(510, 93);
             this.definitionBox.TabIndex = 31;
             // 
             // definitionLabel
@@ -139,7 +140,7 @@
             this.summaryBox.Location = new System.Drawing.Point(99, 25);
             this.summaryBox.Multiline = true;
             this.summaryBox.Name = "summaryBox";
-            this.summaryBox.Size = new System.Drawing.Size(497, 43);
+            this.summaryBox.Size = new System.Drawing.Size(510, 43);
             this.summaryBox.TabIndex = 29;
             // 
             // summaryLabel
@@ -164,8 +165,7 @@
             // 
             // fieldGrid
             // 
-            this.fieldGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.fieldGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fieldGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.fieldGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -175,7 +175,7 @@
             this.fieldGrid.Location = new System.Drawing.Point(99, 173);
             this.fieldGrid.Name = "fieldGrid";
             this.fieldGrid.RowTemplate.Height = 21;
-            this.fieldGrid.Size = new System.Drawing.Size(497, 105);
+            this.fieldGrid.Size = new System.Drawing.Size(510, 342);
             this.fieldGrid.TabIndex = 41;
             // 
             // fieldNameColumn
@@ -214,7 +214,7 @@
             this.Controls.Add(this.summaryBox);
             this.Controls.Add(this.summaryLabel);
             this.Name = "CTypeEditor";
-            this.Size = new System.Drawing.Size(611, 415);
+            this.Size = new System.Drawing.Size(624, 652);
             ((System.ComponentModel.ISupportInitialize)(this.fieldGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

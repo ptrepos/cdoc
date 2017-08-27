@@ -19,7 +19,7 @@ namespace CDocEditor {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class MessageResource {
@@ -75,6 +75,33 @@ namespace CDocEditor {
         internal static string Function {
             get {
                 return ResourceManager.GetString("Function", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   In に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string IoType_In {
+            get {
+                return ResourceManager.GetString("IoType_In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   InOut に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string IoType_InOut {
+            get {
+                return ResourceManager.GetString("IoType_InOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Out に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string IoType_Out {
+            get {
+                return ResourceManager.GetString("IoType_Out", resourceCulture);
             }
         }
         

@@ -369,7 +369,14 @@ namespace Magica.Pgdoc.Clang
                 builder.AppendLine("<dl>");
                 foreach (CFunctionParameter p in function.Parameters)
                 {
-                    builder.AppendFormat("<dt>{0}</dt>", Escape(p.Name));
+                    if (p.IoType == IoType.In)
+                    {
+                        builder.AppendFormat("<dt>{0}</dt>", Escape(p.Name));
+                    }
+                    else
+                    {
+                        builder.AppendFormat("<dt>[{1}] {0}</dt>", Escape(p.Name), EncodeIoType(p.IoType));
+                    }
                     builder.AppendLine("<dd>");
                     builder.AppendLine(EncodeMdoc(p.Description));
                     builder.AppendLine("</dd>");
@@ -451,6 +458,20 @@ namespace Magica.Pgdoc.Clang
                     return TextResource.Union;
                 case TypeKind.Typedef:
                     return "";
+            }
+            return "";
+        }
+
+        private string EncodeIoType(IoType type)
+        {
+            switch (type)
+            {
+                case IoType.In:
+                    return "in";
+                case IoType.Out:
+                    return "out";
+                case IoType.InOut:
+                    return "inout";
             }
             return "";
         }

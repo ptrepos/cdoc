@@ -147,7 +147,7 @@ namespace Magica.Pgdoc.Clang
             CFunctionParameter parameter = new CFunctionParameter();
 
             parameter.Name = paramElem.GetAttribute("name");
-
+            parameter.IoType = ParseIoType(paramElem.GetAttribute("io"));
             parameter.Description = GetString(paramElem, "description");
 
             return parameter;
@@ -181,6 +181,23 @@ namespace Magica.Pgdoc.Clang
             }
 
             throw new Exception("invalid type kind [" + text + "]");
+        }
+
+        private IoType ParseIoType(string text)
+        {
+            if (text == "in")
+            {
+                return IoType.In;
+            }
+            else if (text == "out")
+            {
+                return IoType.Out;
+            }
+            else if (text == "inout")
+            {
+                return IoType.InOut;
+            }
+            return IoType.In;
         }
     }
 }

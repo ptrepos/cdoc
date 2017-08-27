@@ -19,6 +19,8 @@ namespace CDocEditor
             FormUtil.AutoTabIndex(this);
 
             this.node = node;
+
+            InitializeComboBox();
         }
 
         public Control Control { get { return this; } }
@@ -59,6 +61,31 @@ namespace CDocEditor
 
             this.node.Text = this.node.Data.Name;
         }
+
+        private void InitializeComboBox()
+        {
+            List<IoTypeItem> dataSource = new List<IoTypeItem>();
+            dataSource.Add(new IoTypeItem(MessageResource.IoType_In, IoType.In));
+            dataSource.Add(new IoTypeItem(MessageResource.IoType_Out, IoType.Out));
+            dataSource.Add(new IoTypeItem(MessageResource.IoType_InOut, IoType.InOut));
+
+            IoTypeColumn.DisplayMember = "Name";
+            IoTypeColumn.ValueMember = "Value";
+            IoTypeColumn.DataSource = dataSource;
+        }
+
+        private class IoTypeItem
+        {
+            public IoTypeItem(string name, IoType value)
+            {
+                this.Value = value;
+                this.Name = name;
+            }
+
+            public IoType Value { get; set; }
+            public string Name { get; set; }
+        }
+
 
         private void nameBox_Validated(object sender, EventArgs e)
         {
