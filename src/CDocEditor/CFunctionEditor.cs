@@ -69,9 +69,9 @@ namespace CDocEditor
             dataSource.Add(new IoTypeItem(MessageResource.IoType_Out, IoType.Out));
             dataSource.Add(new IoTypeItem(MessageResource.IoType_InOut, IoType.InOut));
 
-            IoTypeColumn.DisplayMember = "Name";
-            IoTypeColumn.ValueMember = "Value";
-            IoTypeColumn.DataSource = dataSource;
+            ioTypeColumn.DisplayMember = "Name";
+            ioTypeColumn.ValueMember = "Value";
+            ioTypeColumn.DataSource = dataSource;
         }
 
         private class IoTypeItem

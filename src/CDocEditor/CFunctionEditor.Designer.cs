@@ -42,7 +42,7 @@
             this.summaryBox = new System.Windows.Forms.TextBox();
             this.summaryLabel = new System.Windows.Forms.Label();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IoTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ioTypeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.parameterGrid)).BeginInit();
             this.SuspendLayout();
@@ -119,13 +119,14 @@
             // 
             // parameterGrid
             // 
+            this.parameterGrid.AllowDrop = true;
             this.parameterGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.parameterGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.parameterGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.parameterGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameColumn,
-            this.IoTypeColumn,
+            this.ioTypeColumn,
             this.descriptionColumn});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -191,11 +192,11 @@
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.Width = 120;
             // 
-            // IoTypeColumn
+            // ioTypeColumn
             // 
-            this.IoTypeColumn.DataPropertyName = "IoType";
-            this.IoTypeColumn.HeaderText = "I/O";
-            this.IoTypeColumn.Name = "IoTypeColumn";
+            this.ioTypeColumn.DataPropertyName = "IoType";
+            this.ioTypeColumn.HeaderText = "I/O";
+            this.ioTypeColumn.Name = "ioTypeColumn";
             // 
             // descriptionColumn
             // 
@@ -244,7 +245,7 @@
         private System.Windows.Forms.TextBox summaryBox;
         private System.Windows.Forms.Label summaryLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn IoTypeColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ioTypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
     }
 }

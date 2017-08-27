@@ -554,8 +554,9 @@ namespace CDocEditor
                                     e.Effect = DragDropEffects.None;
                                 }
                             }
-                            else
+                            else if (target.Parent is GroupTreeNode)
                             {
+                                // グループへドロップ
                                 GroupTreeNode groupNode2 = (GroupTreeNode)target.Parent;
                                 if (groupNode2.Type == parent.Type)
                                 {
@@ -564,6 +565,25 @@ namespace CDocEditor
                                 else
                                 {
                                     e.Effect = DragDropEffects.None;
+                                }
+                            }
+                            else if(target is CHeaderFileTreeNode)
+                            {
+                                // ヘッダへドロップ
+                                e.Effect = DragDropEffects.None;
+
+                                for (int i = 0; i < target.Nodes.Count; i++)
+                                {
+                                    if (target.Nodes[i] is GroupTreeNode)
+                                    {
+                                        GroupTreeNode groupNode2 = (GroupTreeNode)target.Nodes[i];
+                                        if (groupNode2.Type == parent.Type)
+                                        {
+                                            groupNode2.Nodes.Add((TreeNode)node.Clone());
+                                            e.Effect = DragDropEffects.Move;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         }
